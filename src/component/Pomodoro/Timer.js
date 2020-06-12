@@ -5,95 +5,97 @@ import Clock from "./Clock";
 
 const Timer = () => {
   const [sec, setSec] = useState(null);
-  const [isGoing, setIsGoing] = useState(false);
-  const [isPaused, setIsPaused] = useState(false);
+  const [countToggle, setCountToggle] = useState(false);
+  const [pauseToggle, setPauseToggle] = useState(false);
   const [resumeToggle, setResumeToggle] = useState(false);
-
+  const [timeToggle, setTimeToggle] = useState(false);
   const timeoutRef = useRef(null);
+
   useEffect(() => {
     if (sec === null) return;
-
     if (sec === 0) {
       clearTimeout(timeoutRef.current);
-      setIsGoing(false);
+      setCountToggle(false);
       return;
     }
-
     timeoutRef.current = setTimeout(() => {
       setSec(sec - 1);
     }, 1000);
   }, [sec, resumeToggle]);
 
-  const handleStart = (seconds) => {
-    setIsGoing(true);
-    setSec(seconds);
+  const handleStart = () => {
+    setCountToggle(true);
+    if (!timeToggle) setSec(25 * 60);
+    else setSec(50 * 60);
   };
 
   const handlePause = () => {
     clearTimeout(timeoutRef.current);
   };
+
   const handleReset = () => {
     setSec(0);
   };
+
   return (
     <>
-      <Clock sec={sec} isPaused={isPaused} />
+      <Clock sec={sec} pauseToggle={pauseToggle} />
       <div>{timeStringFromSeconds(sec)}</div>
-      {isGoing && isPaused && (
+      {countToggle && pauseToggle && (
         <button
           className="resume-btn btn"
           onClick={() => {
-            handleStart(sec);
             setResumeToggle(!resumeToggle);
-            setIsPaused(false);
-            console.log(isPaused);
+            setPauseToggle(false);
+            console.log(pauseToggle);
           }}
         >
           resume
         </button>
       )}
-      {isGoing && !isPaused && (
+      {countToggle && !pauseToggle && (
         <button
           className="pause-btn btn"
           onClick={() => {
             handlePause();
-            setIsPaused(true);
-            console.log(isPaused);
+            setPauseToggle(true);
           }}
         >
           pause
         </button>
       )}
-      {isGoing && (
+      {countToggle && (
         <button
           className="reset-btn btn"
           onClick={() => {
             handleReset();
-            setIsGoing(false);
-            setIsPaused(false);
+            setCountToggle(false);
+            setPauseToggle(false);
           }}
         >
           reset
         </button>
       )}
-      {!isGoing && (
+      {!countToggle && (
         <>
-          <button
-            className="five-btn"
-            onClick={() => {
-              handleStart(5 * 60);
-              console.log(isPaused);
-            }}
-          >
-            05:00
+          <button className="start-btn btn" onClick={handleStart}>
+            start
           </button>
           <button
-            className="twenty-five-btn"
+            className="thirty-btn"
             onClick={() => {
-              handleStart(25 * 60);
+              setTimeToggle(false);
             }}
           >
-            25:00
+            30
+          </button>
+          <button
+            className="sixty-btn btn"
+            onClick={() => {
+              setTimeToggle(true);
+            }}
+          >
+            60
           </button>
         </>
       )}

@@ -33,44 +33,6 @@
 //   //     } else if (type == "stroke") {
 //   //       ctx.strokeStyle = color;
 //   //       ctx.lineWidth = thickness;
-//   //       drawArc(x, y, radius, start, end, clockwise);
-//   //       ctx.stroke();
-//   //     }
-//   //   };
-//   //     const radS = 0.006 * (sec * 1000);
-//   //     ctx.fillStyle = "rgb(200,0,0)";
-//   //     ctx.fillRect(10, 10, 50, 50);
-
-//   //     ctx.fillStyle = "rgba(0, 0, 200, 0.5)";
-//   //     ctx.fillRect(30, 30, 50, 50);
-//   //     // drawCircle(
-//   //     //   centerX,
-//   //     //   centerY,
-//   //     //   360,
-//   //     //   threePIByTwo,
-//   //     //   rad(radS) + threePIByTwo,
-//   //     //   false,
-//   //     //   "black",
-//   //     //   "stroke",
-//   //     //   30
-//   //     // );
-//   //     window.requestAnimationFrame(draw);
-//   const canvasRef = useRef(null);
-//   useEffect(() => {
-//     const canvas = canvasRef.current;
-//     const ctx = canvas.getContext("2d");
-//     init();
-//   });
-//   function init() {
-//     canvas.width = document.documentElement.clientWidth - 35;
-//     canvas.height = document.documentElement.clientHeight - 45;
-//     window.requestAnimationFrame(draw);
-//   }
-//   return <canvas ref={canvasRef} class="canvas" width="150px" height="150px" />;
-// };
-
-// export default Clock;
-
 import React, { useRef, useEffect } from "react";
 import { timeStringFromSeconds } from "../../util";
 
@@ -90,7 +52,7 @@ const getPixelRatio = (context) => {
 const Clock = (props) => {
   let ref = useRef();
   const sec = props.sec;
-  const isPaused = props.isPaused;
+  const pauseToggle = props.pauseToggle;
 
   useEffect(() => {
     let canvas = ref.current;
@@ -187,7 +149,7 @@ const Clock = (props) => {
         "stroke",
         radius / 2
       );
-      if (isPaused) {
+      if (pauseToggle) {
         drawText(
           "Paused",
           centerX - radius / 3,
@@ -204,31 +166,6 @@ const Clock = (props) => {
           `${radius / 5}px`
         );
       }
-      // ctx.beginPath();
-      // ctx.moveTo(centerX, 0);
-      // ctx.lineTo(centerX, centerY);
-      // ctx.lineTo(
-      //   { centerX } + { radius } * Math.sin(theta),
-      //   { radius } - { radius } * Math.cos(theta)
-      // );
-      // ctx.arc(
-      //   centerX,
-      //   centerY,
-      //   radius - 11,
-      //   threePIByTwo + l,
-      //   threePIByTwo,
-      //   true
-      // );
-      // ctx.fillStyle = "black";
-      // ctx.fill();
-
-      // ctx.beginPath();
-      // ctx.moveTo(centerX, 8);
-      // ctx.lineTo(centerX, centerY);
-      // ctx.lineTo(centerX * 2, 400);
-      // ctx.lineWidth = 8;
-      // ctx.strokeStyle = "blue";
-      // ctx.stroke();
       requestId = requestAnimationFrame(handleCount);
     };
     if (sec === null || sec === 0) {
@@ -240,7 +177,7 @@ const Clock = (props) => {
     return () => {
       cancelAnimationFrame(requestId);
     };
-  }, [sec, isPaused]);
+  }, [sec, pauseToggle]);
 
   return <canvas ref={ref} style={{ width: "300px", height: "300px" }} />;
 };
