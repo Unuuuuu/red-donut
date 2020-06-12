@@ -1,5 +1,4 @@
 import React, { useState, useRef, useEffect } from "react";
-import { timeStringFromSeconds } from "../../util";
 import "./Timer.css";
 import Clock from "./Clock";
 
@@ -9,6 +8,7 @@ const Timer = () => {
   const [pauseToggle, setPauseToggle] = useState(false);
   const [resumeToggle, setResumeToggle] = useState(false);
   const [timeToggle, setTimeToggle] = useState(false);
+  const [task, setTask] = useState("");
   const timeoutRef = useRef(null);
 
   useEffect(() => {
@@ -39,15 +39,19 @@ const Timer = () => {
 
   return (
     <>
-      <Clock sec={sec} pauseToggle={pauseToggle} />
-      <div>{timeStringFromSeconds(sec)}</div>
+      <Clock
+        sec={sec}
+        pauseToggle={pauseToggle}
+        task={task}
+        countToggle={countToggle}
+      />
+      <br />
       {countToggle && pauseToggle && (
         <button
           className="resume-btn btn"
           onClick={() => {
             setResumeToggle(!resumeToggle);
             setPauseToggle(false);
-            console.log(pauseToggle);
           }}
         >
           resume
@@ -69,6 +73,7 @@ const Timer = () => {
           className="reset-btn btn"
           onClick={() => {
             handleReset();
+            setTask("");
             setCountToggle(false);
             setPauseToggle(false);
           }}
@@ -79,7 +84,7 @@ const Timer = () => {
       {!countToggle && (
         <>
           <button className="start-btn btn" onClick={handleStart}>
-            start
+            Start
           </button>
           <button
             className="thirty-btn"
@@ -97,6 +102,14 @@ const Timer = () => {
           >
             60
           </button>
+          <br />
+          <input
+            placeholder="할 일 ▶ Enter / Start"
+            onChange={(e) => setTask(e.target.value)}
+            onKeyDown={(e) => {
+              if (e.keyCode === 13) handleStart();
+            }}
+          ></input>
         </>
       )}
     </>

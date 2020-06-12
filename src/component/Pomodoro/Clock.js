@@ -16,7 +16,9 @@ const getPixelRatio = (context) => {
 const Clock = (props) => {
   const ref = useRef();
   const sec = props.sec;
+  const task = props.task;
   const pauseToggle = props.pauseToggle;
+  const countToggle = props.countToggle;
 
   useEffect(() => {
     let canvas = ref.current;
@@ -84,7 +86,7 @@ const Clock = (props) => {
     const sin30 = Math.sin(Math.PI / 6);
     const cos30 = Math.cos(Math.PI / 6);
 
-    const handleLoad = () => {
+    const drawClock = () => {
       drawCircle(
         centerX,
         centerY,
@@ -96,13 +98,51 @@ const Clock = (props) => {
         "stroke",
         radius / 2
       );
-      drawText(
-        "Welcome",
-        centerX - radius / 2.5,
-        centerY + radius / 16,
-        "black",
-        `${radius / 5}px`
-      );
+    };
+
+    const printText = () => {
+      if (countToggle) {
+        if (pauseToggle) {
+          drawText(
+            "Paused",
+            centerX - radius / 3,
+            centerY + radius / 16,
+            "black",
+            `${radius / 5}px`
+          );
+          drawText(
+            `${task}`,
+            centerX - radius / 3.05,
+            centerY + radius / 6,
+            "black",
+            `${radius / 11}px`
+          );
+        } else {
+          drawText(
+            timeStringFromSeconds(sec),
+            centerX - radius / 4,
+            centerY + radius / 16,
+            "black",
+            `${radius / 5}px`
+          );
+          drawText(
+            `${task}`,
+            centerX - radius / 4,
+            centerY + radius / 6,
+            "black",
+            `${radius / 11}px`
+          );
+        }
+      } else if (!countToggle)
+        drawText(
+          "Welcome",
+          centerX - radius / 2.5,
+          centerY + radius / 16,
+          "black",
+          `${radius / 5}px`
+        );
+    };
+    const drawClockLine = () => {
       drawLine(centerX, 0, centerX, radius / 6);
       drawLine(centerX * 2, centerY, centerX * 2 - radius / 6, centerY);
       drawLine(centerX, centerY * 2, centerX, centerY * 2 - radius / 6);
@@ -157,18 +197,7 @@ const Clock = (props) => {
       );
     };
 
-    const handleCount = () => {
-      drawCircle(
-        centerX,
-        centerY,
-        radius - radius / 4,
-        0,
-        Math.PI * 2,
-        true,
-        "#C0C0C0",
-        "stroke",
-        radius / 2
-      );
+    const drawGauge = () => {
       drawCircle(
         centerX,
         centerY,
@@ -180,85 +209,14 @@ const Clock = (props) => {
         "stroke",
         radius / 2
       );
-      if (pauseToggle) {
-        drawText(
-          "Paused",
-          centerX - radius / 3,
-          centerY + radius / 16,
-          "black",
-          `${radius / 5}px`
-        );
-      } else {
-        drawText(
-          timeStringFromSeconds(sec),
-          centerX - radius / 4,
-          centerY + radius / 16,
-          "black",
-          `${radius / 5}px`
-        );
-      }
-      drawLine(centerX, 0, centerX, radius / 6);
-      drawLine(centerX * 2, centerY, centerX * 2 - radius / 6, centerY);
-      drawLine(centerX, centerY * 2, centerX, centerY * 2 - radius / 6);
-      drawLine(0, centerY, radius / 6, centerY);
-      drawLine(
-        centerX + radius * sin30,
-        centerY + radius * cos30,
-        centerX + radius * sin30 - (radius / 12) * sin30,
-        centerY + radius * cos30 - (radius / 12) * cos30
-      );
-      drawLine(
-        centerX - radius * sin30,
-        centerY - radius * cos30,
-        centerX - radius * sin30 + (radius / 12) * sin30,
-        centerY - radius * cos30 + (radius / 12) * cos30
-      );
-      drawLine(
-        centerX - radius * sin30,
-        centerY + radius * cos30,
-        centerX - radius * sin30 + (radius / 12) * sin30,
-        centerY + radius * cos30 - (radius / 12) * cos30
-      );
-      drawLine(
-        centerX + radius * sin30,
-        centerY - radius * cos30,
-        centerX + radius * sin30 - (radius / 12) * sin30,
-        centerY - radius * cos30 + (radius / 12) * cos30
-      );
-      drawLine(
-        centerX + radius * cos30,
-        centerY - radius * sin30,
-        centerX + radius * cos30 - (radius / 12) * cos30,
-        centerY - radius * sin30 + (radius / 12) * sin30
-      );
-      drawLine(
-        centerX + radius * cos30,
-        centerY + radius * sin30,
-        centerX + radius * cos30 - (radius / 12) * cos30,
-        centerY + radius * sin30 - (radius / 12) * sin30
-      );
-      drawLine(
-        centerX - radius * cos30,
-        centerY - radius * sin30,
-        centerX - radius * cos30 + (radius / 12) * cos30,
-        centerY - radius * sin30 + (radius / 12) * sin30
-      );
-      drawLine(
-        centerX - radius * cos30,
-        centerY + radius * sin30,
-        centerX - radius * cos30 + (radius / 12) * cos30,
-        centerY + radius * sin30 - (radius / 12) * sin30
-      );
-      requestId = requestAnimationFrame(handleCount);
+      requestId = requestAnimationFrame(drawGauge);
     };
 
-    if (sec === null || sec === 0) {
-      return handleLoad();
-    }
-
-    if (sec !== 0) {
-      handleCount();
-    }
+    printText();
+    drawClock();
+    drawGauge();
+    drawClockLine();
+    ctx.globalCompositeOperation = "destination-over";
 
     return () => {
       cancelAnimationFrame(requestId);
