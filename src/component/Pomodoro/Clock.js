@@ -1,38 +1,3 @@
-// import React, { useEffect, useRef } from "react";
-
-// const Clock = (props) => {
-//   const sec = props.sec;
-//   //   const canvas = document.querySelector(".canvas");
-//   //   function draw(now) {
-//   //     const centerX = canvas.width / 2;
-//   //     const centerY = canvas.width / 2;
-//   //     const threePIByTwo = (3 * Math.PI) / 2;
-
-//   //     const rad = (deg) => {
-//   //       return (Math.PI / 180) * deg;
-//   //     };
-//   //     const drawArc = (x, y, radius, start, end, clockwise) => {
-//   //       ctx.beginPath();
-//   //       ctx.arc(x, y, radius, start, end, clockwise);
-//   //     };
-//   //   const drawCircle = (
-//   //     x,
-//   //     y,
-//   //     radius,
-//   //     start,
-//   //     end,
-//   //     clockwise,
-//   //     color,
-//   //     type,
-//   //     thickness
-//   //   ) => {
-//   //     if (type == "fill") {
-//   //       ctx.fillStyle = color;
-//   //       drawArc(x, y, radius, start, end, clockwise);
-//   //       ctx.fill();
-//   //     } else if (type == "stroke") {
-//   //       ctx.strokeStyle = color;
-//   //       ctx.lineWidth = thickness;
 import React, { useRef, useEffect } from "react";
 import { timeStringFromSeconds } from "../../util";
 
@@ -45,35 +10,35 @@ const getPixelRatio = (context) => {
     context.oBackingStorePixelRatio ||
     context.backingStorePixelRatio ||
     1;
-
   return (window.devicePixelRatio || 1) / backingStore;
 };
 
 const Clock = (props) => {
-  let ref = useRef();
+  const ref = useRef();
   const sec = props.sec;
   const pauseToggle = props.pauseToggle;
 
   useEffect(() => {
     let canvas = ref.current;
     let ctx = canvas.getContext("2d");
+    let requestId;
 
     let ratio = getPixelRatio(ctx);
     let width = getComputedStyle(canvas).getPropertyValue("width").slice(0, -2);
     let height = getComputedStyle(canvas)
       .getPropertyValue("height")
       .slice(0, -2);
-
     canvas.width = width * ratio;
     canvas.height = height * ratio;
     canvas.style.width = `${width}px`;
     canvas.style.height = `${height}px`;
-    let requestId;
-    function drawArc(x, y, radius, start, end, clockwise) {
+
+    const drawArc = (x, y, radius, start, end, clockwise) => {
       ctx.beginPath();
       ctx.arc(x, y, radius, start, end, clockwise);
-    }
-    function drawCircle(
+    };
+
+    const drawCircle = (
       x,
       y,
       radius,
@@ -83,7 +48,7 @@ const Clock = (props) => {
       color,
       type,
       thickness
-    ) {
+    ) => {
       if (type === "fill") {
         ctx.fillStyle = color;
         drawArc(x, y, radius, start, end, clockwise);
@@ -94,17 +59,30 @@ const Clock = (props) => {
         drawArc(x, y, radius, start, end, clockwise);
         ctx.stroke();
       }
-    }
-    function drawText(text, x, y, color, size) {
+    };
+
+    const drawText = (text, x, y, color, size) => {
       ctx.font = `${size} "Arial"`;
       ctx.fillStyle = color;
       ctx.fillText(text, x, y);
-    }
+    };
+
+    const drawLine = (x, y, x1, y1) => {
+      ctx.beginPath();
+      ctx.moveTo(x, y);
+      ctx.lineTo(x1, y1);
+      ctx.strokeStyle = "white";
+      ctx.lineWidth = radius / 120;
+      ctx.stroke();
+    };
+
     const centerX = canvas.width / 2;
     const centerY = canvas.height / 2;
     const radius = canvas.width / 2;
     const threePIByTwo = (3 * Math.PI) / 2;
     const l = (Math.PI * sec) / 1800;
+    const sin30 = Math.sin(Math.PI / 6);
+    const cos30 = Math.cos(Math.PI / 6);
 
     const handleLoad = () => {
       drawCircle(
@@ -114,7 +92,7 @@ const Clock = (props) => {
         0,
         Math.PI * 2,
         true,
-        "#b2ada6",
+        "#C0C0C0",
         "stroke",
         radius / 2
       );
@@ -125,7 +103,60 @@ const Clock = (props) => {
         "black",
         `${radius / 5}px`
       );
+      drawLine(centerX, 0, centerX, radius / 6);
+      drawLine(centerX * 2, centerY, centerX * 2 - radius / 6, centerY);
+      drawLine(centerX, centerY * 2, centerX, centerY * 2 - radius / 6);
+      drawLine(0, centerY, radius / 6, centerY);
+      drawLine(
+        centerX + radius * sin30,
+        centerY + radius * cos30,
+        centerX + radius * sin30 - (radius / 12) * sin30,
+        centerY + radius * cos30 - (radius / 12) * cos30
+      );
+      drawLine(
+        centerX - radius * sin30,
+        centerY - radius * cos30,
+        centerX - radius * sin30 + (radius / 12) * sin30,
+        centerY - radius * cos30 + (radius / 12) * cos30
+      );
+      drawLine(
+        centerX - radius * sin30,
+        centerY + radius * cos30,
+        centerX - radius * sin30 + (radius / 12) * sin30,
+        centerY + radius * cos30 - (radius / 12) * cos30
+      );
+      drawLine(
+        centerX + radius * sin30,
+        centerY - radius * cos30,
+        centerX + radius * sin30 - (radius / 12) * sin30,
+        centerY - radius * cos30 + (radius / 12) * cos30
+      );
+      drawLine(
+        centerX + radius * cos30,
+        centerY - radius * sin30,
+        centerX + radius * cos30 - (radius / 12) * cos30,
+        centerY - radius * sin30 + (radius / 12) * sin30
+      );
+      drawLine(
+        centerX + radius * cos30,
+        centerY + radius * sin30,
+        centerX + radius * cos30 - (radius / 12) * cos30,
+        centerY + radius * sin30 - (radius / 12) * sin30
+      );
+      drawLine(
+        centerX - radius * cos30,
+        centerY - radius * sin30,
+        centerX - radius * cos30 + (radius / 12) * cos30,
+        centerY - radius * sin30 + (radius / 12) * sin30
+      );
+      drawLine(
+        centerX - radius * cos30,
+        centerY + radius * sin30,
+        centerX - radius * cos30 + (radius / 12) * cos30,
+        centerY + radius * sin30 - (radius / 12) * sin30
+      );
     };
+
     const handleCount = () => {
       drawCircle(
         centerX,
@@ -134,7 +165,7 @@ const Clock = (props) => {
         0,
         Math.PI * 2,
         true,
-        "#b2ada6",
+        "#C0C0C0",
         "stroke",
         radius / 2
       );
@@ -166,14 +197,69 @@ const Clock = (props) => {
           `${radius / 5}px`
         );
       }
+      drawLine(centerX, 0, centerX, radius / 6);
+      drawLine(centerX * 2, centerY, centerX * 2 - radius / 6, centerY);
+      drawLine(centerX, centerY * 2, centerX, centerY * 2 - radius / 6);
+      drawLine(0, centerY, radius / 6, centerY);
+      drawLine(
+        centerX + radius * sin30,
+        centerY + radius * cos30,
+        centerX + radius * sin30 - (radius / 12) * sin30,
+        centerY + radius * cos30 - (radius / 12) * cos30
+      );
+      drawLine(
+        centerX - radius * sin30,
+        centerY - radius * cos30,
+        centerX - radius * sin30 + (radius / 12) * sin30,
+        centerY - radius * cos30 + (radius / 12) * cos30
+      );
+      drawLine(
+        centerX - radius * sin30,
+        centerY + radius * cos30,
+        centerX - radius * sin30 + (radius / 12) * sin30,
+        centerY + radius * cos30 - (radius / 12) * cos30
+      );
+      drawLine(
+        centerX + radius * sin30,
+        centerY - radius * cos30,
+        centerX + radius * sin30 - (radius / 12) * sin30,
+        centerY - radius * cos30 + (radius / 12) * cos30
+      );
+      drawLine(
+        centerX + radius * cos30,
+        centerY - radius * sin30,
+        centerX + radius * cos30 - (radius / 12) * cos30,
+        centerY - radius * sin30 + (radius / 12) * sin30
+      );
+      drawLine(
+        centerX + radius * cos30,
+        centerY + radius * sin30,
+        centerX + radius * cos30 - (radius / 12) * cos30,
+        centerY + radius * sin30 - (radius / 12) * sin30
+      );
+      drawLine(
+        centerX - radius * cos30,
+        centerY - radius * sin30,
+        centerX - radius * cos30 + (radius / 12) * cos30,
+        centerY - radius * sin30 + (radius / 12) * sin30
+      );
+      drawLine(
+        centerX - radius * cos30,
+        centerY + radius * sin30,
+        centerX - radius * cos30 + (radius / 12) * cos30,
+        centerY + radius * sin30 - (radius / 12) * sin30
+      );
       requestId = requestAnimationFrame(handleCount);
     };
+
     if (sec === null || sec === 0) {
       return handleLoad();
     }
+
     if (sec !== 0) {
       handleCount();
     }
+
     return () => {
       cancelAnimationFrame(requestId);
     };
