@@ -16,9 +16,9 @@ const getPixelRatio = (context) => {
 const Clock = (props) => {
   const ref = useRef();
   const sec = props.sec;
+  const startToggle = props.startToggle;
+  const pauseResumeToggle = props.pauseResumeToggle;
   const task = props.task;
-  const pauseToggle = props.pauseToggle;
-  const countToggle = props.countToggle;
 
   useEffect(() => {
     let canvas = ref.current;
@@ -94,15 +94,15 @@ const Clock = (props) => {
         0,
         Math.PI * 2,
         true,
-        "#C0C0C0",
+        "#b2b2b2",
         "stroke",
         radius / 2
       );
     };
 
     const printText = () => {
-      if (countToggle) {
-        if (pauseToggle) {
+      if (startToggle) {
+        if (pauseResumeToggle) {
           drawText(
             "Paused",
             centerX - radius / 3,
@@ -133,7 +133,7 @@ const Clock = (props) => {
             `${radius / 11}px`
           );
         }
-      } else if (!countToggle)
+      } else if (!startToggle)
         drawText(
           "Welcome",
           centerX - radius / 2.5,
@@ -142,6 +142,7 @@ const Clock = (props) => {
           `${radius / 5}px`
         );
     };
+
     const drawClockLine = () => {
       drawLine(centerX, 0, centerX, radius / 6);
       drawLine(centerX * 2, centerY, centerX * 2 - radius / 6, centerY);
@@ -211,17 +212,20 @@ const Clock = (props) => {
       );
       requestId = requestAnimationFrame(drawGauge);
     };
+    ctx.globalCompositeOperation = "destination-over";
 
     printText();
-    drawClock();
-    drawGauge();
+    if (startToggle) {
+      drawClockLine();
+      drawGauge();
+    }
     drawClockLine();
-    ctx.globalCompositeOperation = "destination-over";
+    drawClock();
 
     return () => {
       cancelAnimationFrame(requestId);
     };
-  }, [sec, pauseToggle]);
+  }, [sec, pauseResumeToggle, startToggle, task]);
 
   return <canvas ref={ref} style={{ width: "300px", height: "300px" }} />;
 };
