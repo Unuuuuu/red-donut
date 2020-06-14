@@ -5,69 +5,65 @@ import Clock from "./Clock";
 const Timer = () => {
   const [sec, setSec] = useState(null);
   const [startToggle, setStartToggle] = useState(false);
-  const [pauseResumeToggle, setPauseResumeToggle] = useState(false);
-  const [resetToggle, setResetToggle] = useState(false);
+  const [pauseToggle, setPauseToggle] = useState(false);
   const [timeToggle, setTimeToggle] = useState(true);
+  const [restToggle, setRestToggle] = useState(false);
   const [task, setTask] = useState("");
   const timeoutRef = useRef(null);
 
   useEffect(() => {
-    if (startToggle) {
-      setResetToggle(false);
-      if (timeToggle) setSec(25 * 60);
-      else setSec(50 * 60);
+    if (sec === null) return;
+    if (sec === 0) {
+      if (restToggle) {
+        if (timeToggle) setSec(5 * 60);
+        else setSec(10 * 60);
+        setRestToggle(false);
+      } else {
+        clearTimeout(timeoutRef.current);
+        setStartToggle(false);
+        return;
+      }
     }
-  }, [startToggle]);
-
-  useEffect(() => {
-    if (pauseResumeToggle) {
-      clearTimeout(timeoutRef.current);
-    } else {
-    }
-  }, [pauseResumeToggle]);
-
-  useEffect(() => {
-    if (resetToggle) {
-      setStartToggle(false);
-      clearTimeout(timeoutRef.current);
-    }
-  }, [resetToggle]);
-
-  useEffect(() => {
-    if ((sec && startToggle) || !pauseResumeToggle)
+    if (!startToggle) return;
+    if (!pauseToggle) {
       timeoutRef.current = setTimeout(() => {
         setSec(sec - 1);
       }, 1000);
-    if (pauseResumeToggle) {
-      clearTimeout(timeoutRef.current);
     }
-  }, [sec, pauseResumeToggle]);
+  }, [sec, pauseToggle, startToggle]);
+
+  const handleStart = () => {
+    setStartToggle(true);
+    setRestToggle(true);
+    if (timeToggle) setSec(5);
+    else setSec(50 * 60);
+  };
 
   return (
     <>
       <Clock
         sec={sec}
+        pauseToggle={pauseToggle}
         startToggle={startToggle}
-        pauseResumeToggle={pauseResumeToggle}
-        timeToggle={timeToggle}
         task={task}
       />
       <br />
-      {startToggle && pauseResumeToggle && (
+      {startToggle && pauseToggle && (
         <button
           className="resume-btn btn"
           onClick={() => {
-            setPauseResumeToggle(false);
+            setPauseToggle(false);
           }}
         >
           resume
         </button>
       )}
-      {startToggle && !pauseResumeToggle && (
+      {startToggle && !pauseToggle && (
         <button
           className="pause-btn btn"
           onClick={() => {
-            setPauseResumeToggle(true);
+            setPauseToggle(true);
+            clearTimeout(timeoutRef.current);
           }}
         >
           pause
@@ -77,7 +73,10 @@ const Timer = () => {
         <button
           className="reset-btn btn"
           onClick={() => {
-            setResetToggle(true);
+            setStartToggle(false);
+            setPauseToggle(false);
+            setSec(0);
+            setTask("");
           }}
         >
           reset
@@ -85,12 +84,7 @@ const Timer = () => {
       )}
       {!startToggle && (
         <>
-          <button
-            className="start-btn btn"
-            onClick={() => {
-              setStartToggle(true);
-            }}
-          >
+          <button className="start-btn btn" onClick={handleStart}>
             Start
           </button>
           <button
@@ -114,7 +108,7 @@ const Timer = () => {
             placeholder="할 일 ▶ Enter / Start"
             onChange={(e) => setTask(e.target.value)}
             onKeyDown={(e) => {
-              if (e.keyCode === 13) setStartToggle(true);
+              if (e.keyCode === 13) handleStart();
             }}
           ></input>
         </>

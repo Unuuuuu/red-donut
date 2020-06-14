@@ -1,0 +1,13 @@
+diff a/src/component/Pomodoro/Clock.js b/src/component/Pomodoro/Clock.js	(rejected hunks)
+@@ -16,9 +16,9 @@
+ const Clock = (props) => {
+   const ref = useRef();
+   const sec = props.sec;
++  const startToggle = props.startToggle;
++  const pauseResumeToggle = props.pauseResumeToggle;
+   const task = props.task;
+-  const pauseToggle = props.pauseToggle;
+-  const countToggle = props.countToggle;
+ 
+   useEffect(() => {
+     let canvas = ref.current;
