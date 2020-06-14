@@ -1,42 +1,70 @@
 import React, { useState, useRef, useEffect } from "react";
 import "./Timer.css";
 import Clock from "./Clock";
+import Task from "./Task";
 
 const Timer = () => {
   const [sec, setSec] = useState(null);
   const [startToggle, setStartToggle] = useState(false);
   const [pauseToggle, setPauseToggle] = useState(false);
-  const [timeToggle, setTimeToggle] = useState(true);
-  const [restToggle, setRestToggle] = useState(false);
+  const [min30, setMin30] = useState(true);
+  const [min60, setMin60] = useState(false);
+  const [mode1, setMode1] = useState(false);
+  const [mode2, setMode2] = useState(false);
   const [task, setTask] = useState("");
+  const [taskArr, setTaskArr] = useState([]);
   const timeoutRef = useRef(null);
 
   useEffect(() => {
-    if (sec === null) return;
-    if (sec === 0) {
-      if (restToggle) {
-        if (timeToggle) setSec(5 * 60);
-        else setSec(10 * 60);
-        setRestToggle(false);
-      } else {
-        clearTimeout(timeoutRef.current);
-        setStartToggle(false);
+    if (startToggle) {
+      if (sec === null) {
+        if (min30) {
+          setMode1(true);
+          setSec(1);
+        }
+        if (min60) {
+          setMode1(true);
+          setSec(50 * 60);
+        }
         return;
       }
-    }
-    if (!startToggle) return;
-    if (!pauseToggle) {
+      if (sec === 0) {
+        if (mode1) {
+          if (min30) {
+            setMode1(false);
+            setMode2(true);
+            setSec(2);
+          }
+          if (min60) {
+            setMode1(false);
+            setMode2(true);
+            setSec(10 * 60);
+          }
+        }
+        if (mode2) {
+          setTaskArr([...taskArr, task]);
+          handleReset();
+        }
+        return;
+      }
+      if (pauseToggle) {
+        clearTimeout(timeoutRef.current);
+        return;
+      }
       timeoutRef.current = setTimeout(() => {
         setSec(sec - 1);
       }, 1000);
     }
-  }, [sec, pauseToggle, startToggle]);
+  }, [sec, startToggle, pauseToggle]);
 
-  const handleStart = () => {
-    setStartToggle(true);
-    setRestToggle(true);
-    if (timeToggle) setSec(5);
-    else setSec(50 * 60);
+  const handleReset = () => {
+    setStartToggle(false);
+    setPauseToggle(false);
+    setSec(null);
+    setTask("");
+    setMode1(false);
+    setMode2(false);
+    clearTimeout(timeoutRef.current);
   };
 
   return (
@@ -45,8 +73,11 @@ const Timer = () => {
         sec={sec}
         pauseToggle={pauseToggle}
         startToggle={startToggle}
+        mode1={mode1}
+        mode2={mode2}
         task={task}
       />
+      <Task taskArr={taskArr} />
       <br />
       {startToggle && pauseToggle && (
         <button
@@ -63,7 +94,6 @@ const Timer = () => {
           className="pause-btn btn"
           onClick={() => {
             setPauseToggle(true);
-            clearTimeout(timeoutRef.current);
           }}
         >
           pause
@@ -73,10 +103,7 @@ const Timer = () => {
         <button
           className="reset-btn btn"
           onClick={() => {
-            setStartToggle(false);
-            setPauseToggle(false);
-            setSec(0);
-            setTask("");
+            handleReset();
           }}
         >
           reset
@@ -84,13 +111,19 @@ const Timer = () => {
       )}
       {!startToggle && (
         <>
-          <button className="start-btn btn" onClick={handleStart}>
+          <button
+            className="start-btn btn"
+            onClick={() => {
+              setStartToggle(true);
+            }}
+          >
             Start
           </button>
           <button
             className="thirty-btn"
             onClick={() => {
-              setTimeToggle(true);
+              setMin30(true);
+              setMin60(false);
             }}
           >
             30
@@ -98,7 +131,8 @@ const Timer = () => {
           <button
             className="sixty-btn btn"
             onClick={() => {
-              setTimeToggle(false);
+              setMin30(false);
+              setMin60(true);
             }}
           >
             60
@@ -108,7 +142,7 @@ const Timer = () => {
             placeholder="할 일 ▶ Enter / Start"
             onChange={(e) => setTask(e.target.value)}
             onKeyDown={(e) => {
-              if (e.keyCode === 13) handleStart();
+              if (e.keyCode === 13) setStartToggle(true);
             }}
           ></input>
         </>

@@ -16,9 +16,11 @@ const getPixelRatio = (context) => {
 const Clock = (props) => {
   const ref = useRef();
   const sec = props.sec;
-  const task = props.task;
   const pauseToggle = props.pauseToggle;
   const startToggle = props.startToggle;
+  const mode1 = props.mode1;
+  const mode2 = props.mode2;
+  const task = props.task;
 
   useEffect(() => {
     let canvas = ref.current;
@@ -205,7 +207,7 @@ const Clock = (props) => {
         threePIByTwo + l,
         threePIByTwo,
         true,
-        "#e58989",
+        mode1 ? "#e58989" : "#22cc71",
         "stroke",
         radius / 2
       );
