@@ -1,18 +1,29 @@
-import React, { useState, useRef, useEffect } from "react";
-import "./Timer.css";
-import Clock from "./Clock";
-import Task from "./Task";
+import React, { useRef, useEffect } from "react";
+import { useMainContext } from "./Main";
+import min30img from "../../img/min301024.png";
+import min60img from "../../img/min601024.png";
 
-const Timer = () => {
-  const [sec, setSec] = useState(null);
-  const [startToggle, setStartToggle] = useState(false);
-  const [pauseToggle, setPauseToggle] = useState(false);
-  const [min30, setMin30] = useState(true);
-  const [min60, setMin60] = useState(false);
-  const [mode1, setMode1] = useState(false);
-  const [mode2, setMode2] = useState(false);
-  const [task, setTask] = useState("");
-  const [taskArr, setTaskArr] = useState([]);
+const Btns = () => {
+  const {
+    sec,
+    setSec,
+    startToggle,
+    setStartToggle,
+    pauseToggle,
+    setPauseToggle,
+    min30,
+    setMin30,
+    min60,
+    setMin60,
+    mode1,
+    setMode1,
+    mode2,
+    setMode2,
+    task,
+    setTask,
+    taskArr,
+    setTaskArr,
+  } = useMainContext();
   const timeoutRef = useRef(null);
 
   useEffect(() => {
@@ -20,7 +31,7 @@ const Timer = () => {
       if (sec === null) {
         if (min30) {
           setMode1(true);
-          setSec(1);
+          setSec(25 * 60);
         }
         if (min60) {
           setMode1(true);
@@ -33,7 +44,7 @@ const Timer = () => {
           if (min30) {
             setMode1(false);
             setMode2(true);
-            setSec(2);
+            setSec(5 * 60);
           }
           if (min60) {
             setMode1(false);
@@ -68,17 +79,7 @@ const Timer = () => {
   };
 
   return (
-    <>
-      <Clock
-        sec={sec}
-        pauseToggle={pauseToggle}
-        startToggle={startToggle}
-        mode1={mode1}
-        mode2={mode2}
-        task={task}
-      />
-      <Task taskArr={taskArr} />
-      <br />
+    <div className="Btns">
       {startToggle && pauseToggle && (
         <button
           className="resume-btn btn"
@@ -120,35 +121,27 @@ const Timer = () => {
             Start
           </button>
           <button
-            className="thirty-btn"
+            className="min30-btn btn"
             onClick={() => {
               setMin30(true);
               setMin60(false);
             }}
           >
-            30
+            <img src={min30img} width="70px" />
           </button>
           <button
-            className="sixty-btn btn"
+            className="min60-btn btn"
             onClick={() => {
               setMin30(false);
               setMin60(true);
             }}
           >
-            60
+            <img src={min60img} width="70px" />
           </button>
-          <br />
-          <input
-            placeholder="할 일 ▶ Enter / Start"
-            onChange={(e) => setTask(e.target.value)}
-            onKeyDown={(e) => {
-              if (e.keyCode === 13) setStartToggle(true);
-            }}
-          ></input>
         </>
       )}
-    </>
+    </div>
   );
 };
 
-export default Timer;
+export default Btns;

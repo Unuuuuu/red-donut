@@ -1,14 +1,15 @@
 import React from "react";
-import Timer from "./Timer";
-import img from "../../img/pomodoro.png";
+import Main from "./Main";
+import "./Pomodoro.css";
 
 const Pomodoro = () => {
   return (
-    <>
-      <img src={img} alt="alt"></img>
-      <br />
-      <Timer />
-    </>
+    <div className="Pomodoro">
+      <div className="Header">
+        <div className="title">P o m o d o r o</div>
+      </div>
+      <Main />
+    </div>
   );
 };
 export default Pomodoro;

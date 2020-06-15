@@ -1,12 +1,12 @@
 import React from "react";
+import "./Task.css";
 
 const Task = (props) => {
   const taskArr = props.taskArr;
   return (
     <>
-      {console.log(taskArr)}
       {taskArr.map((v) => (
-        <p>{v}</p>
+        <div className="task-arr">{v}</div>
       ))}
     </>
   );

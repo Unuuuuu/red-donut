@@ -1,5 +1,6 @@
 import React, { useRef, useEffect } from "react";
 import { timeStringFromSeconds } from "../../util";
+import "./Clock.css";
 
 const getPixelRatio = (context) => {
   var backingStore =
@@ -66,7 +67,7 @@ const Clock = (props) => {
     };
 
     const drawText = (text, x, y, color, size) => {
-      ctx.font = `${size} "Arial"`;
+      ctx.font = `${size} "Nanum Gothic"`;
       ctx.fillStyle = color;
       ctx.fillText(text, x, y);
     };
@@ -225,7 +226,11 @@ const Clock = (props) => {
     };
   }, [sec, pauseToggle]);
 
-  return <canvas ref={ref} style={{ width: "300px", height: "300px" }} />;
+  return (
+    <div className="Clock">
+      <canvas ref={ref} style={{ width: "450px", height: "450px" }} />
+    </div>
+  );
 };
 
 export default Clock;
