@@ -1,0 +1,31 @@
+.TaskInput {
+  height: 90px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.TaskInput .input {
+  width: 400px;
+  height: 100%;
+  font-size: 30px;
+  text-align: center;
+  background-color: #e5e5e5;
+  border: none;
+  border-radius: 12px;
+}
+
+.TaskInput .input:focus {
+  border: none;
+  outline: none;
+}
+
+.TaskInput .isStarted {
+  cursor: not-allowed;
+}
+
+.RecordBtn {
+  width: 90px;
+  height: 100%;
+  background-color: #e5e5e5;
+  cursor: not-allowed;
+}

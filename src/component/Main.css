@@ -1,0 +1,20 @@
+.Main {
+  display: flex;
+  justify-content: space-between;
+  width: 1010px;
+  height: 700px;
+}
+
+.ClockContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 500px;
+}
+
+.RecordContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 500px;
+}

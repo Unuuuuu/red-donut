@@ -1,12 +1,9 @@
 import React from "react";
-import Pomodoro from "./component/Pomodoro/Pomodoro";
+import Pomodoro from "./component/Pomodoro";
+import "./App.css";
 
 const App = () => {
-  return (
-    <>
-      <Pomodoro />
-    </>
-  );
+  return <Pomodoro />;
 };
 
 export default App;

@@ -1,0 +1,47 @@
+.Btns {
+  display: flex;
+  justify-content: space-between;
+  height: 90px;
+}
+
+.btn {
+  border: none;
+  border-radius: 12px;
+  font-size: 30px;
+  outline: none;
+  background-color: #e5e5e5;
+  cursor: pointer;
+}
+
+.btn:hover {
+  background-color: #dcdcdc;
+}
+
+.Btns .clicked {
+  background-color: #d3d3d3;
+}
+
+.start-btn {
+  width: 300px;
+}
+
+.min30-btn,
+.min60-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 90px;
+}
+
+.btn img {
+  width: 60px;
+}
+
+.resume-btn,
+.pause-btn {
+  width: 300px;
+}
+
+.reset-btn {
+  width: 190px;
+}
