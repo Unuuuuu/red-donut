@@ -7,8 +7,8 @@ import Record from "./Record";
 import "./Main.css";
 
 export const MODE = {
-  MIN30: 0,
-  MIN60: 1,
+  MIN30: 1,
+  MIN60: 2,
 };
 
 export const STATUS = {
@@ -32,6 +32,8 @@ const MainContext = React.createContext({
   setCurretTask: () => {},
   taskArr: [],
   setTaskArr: () => {},
+  pomoNum: 0,
+  setPomoNum: () => {},
 });
 
 export const useMainContext = () => useContext(MainContext);
@@ -44,6 +46,7 @@ const Main = () => {
   const [currentStatus, setCurrentStatus] = useState(STATUS.DEFAULT);
   const [currentTask, setCurrentTask] = useState("");
   const [taskArr, setTaskArr] = useState([]);
+  const [pomoNum, setPomoNum] = useState(0);
   return (
     <MainContext.Provider
       value={{
@@ -61,6 +64,8 @@ const Main = () => {
         setCurrentTask,
         taskArr,
         setTaskArr,
+        pomoNum,
+        setPomoNum,
       }}
     >
       <div className="Main">

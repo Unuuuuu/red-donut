@@ -26,7 +26,9 @@ const TaskInput = () => {
         readOnly={isStarted}
       ></input>
       <button className="RecordBtn btn">
-        📜
+        <span role="img" aria-label="record">
+          📜
+        </span>
         {/* <FontAwesomeIcon icon={faFile} size="10px" color="gray" /> */}
       </button>
     </div>

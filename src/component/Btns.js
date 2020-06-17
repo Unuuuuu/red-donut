@@ -21,10 +21,12 @@ const Btns = () => {
     setCurrentTask,
     taskArr,
     setTaskArr,
+    pomoNum,
+    setPomoNum,
   } = useMainContext();
   const timeoutRef = useRef(null);
-  const isFirstTime = useCallback(() => sec === null, [sec]);
-  const isEndTime = useCallback(() => sec === 0, [sec]);
+  const isFirstLoadOrResume = useCallback(() => sec === null, [sec]);
+  const isSecZero = useCallback(() => sec === 0, [sec]);
   const handleReset = useCallback(() => {
     setIsStarted(false);
     setIsPaused(false);
@@ -33,14 +35,14 @@ const Btns = () => {
     setCurrentStatus(STATUS.DEFAULT);
     clearTimeout(timeoutRef.current);
   }, [setIsStarted, setIsPaused, setSec, setCurrentTask, setCurrentStatus]);
-  const MIN5 = 5 * 60;
-  const MIN10 = 10 * 60;
-  const MIN25 = 25 * 60;
-  const MIN50 = 50 * 60;
+  const MIN5 = 1;
+  const MIN10 = 1;
+  const MIN25 = 1;
+  const MIN50 = 1;
 
   useEffect(() => {
     if (isStarted) {
-      if (isFirstTime()) {
+      if (isFirstLoadOrResume()) {
         if (currentMode === MODE.MIN30) {
           setCurrentStatus(STATUS.WORK);
           setSec(MIN25);
@@ -50,20 +52,18 @@ const Btns = () => {
           setSec(MIN50);
         }
         return;
-      }
-      if (isEndTime()) {
+      } else if (isSecZero()) {
         if (currentStatus === STATUS.WORK) {
           if (currentMode === MODE.MIN30) {
-            setCurrentMode(STATUS.BREAK);
+            setCurrentStatus(STATUS.BREAK);
             setSec(MIN5);
-          }
-          if (currentMode === MODE.MIN60) {
-            setCurrentMode(STATUS.BREAK);
+          } else if (currentMode === MODE.MIN60) {
+            setCurrentStatus(STATUS.BREAK);
             setSec(MIN10);
           }
-        }
-        if (currentStatus === STATUS.WORK) {
-          setTaskArr([...taskArr, currentTask]);
+        } else if (currentStatus === STATUS.BREAK) {
+          setTaskArr([...taskArr, { task: currentTask, mode: currentMode }]);
+          setPomoNum(pomoNum + currentMode);
           handleReset();
         }
         return;
@@ -88,13 +88,15 @@ const Btns = () => {
     currentStatus,
     currentTask,
     handleReset,
-    isEndTime,
-    isFirstTime,
+    isSecZero,
+    isFirstLoadOrResume,
     setCurrentMode,
     setCurrentStatus,
     setSec,
     setTaskArr,
     taskArr,
+    pomoNum,
+    setPomoNum,
   ]);
 
   return (
