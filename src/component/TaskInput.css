@@ -5,7 +5,7 @@
 }
 
 .TaskInput .input {
-  width: 400px;
+  width: 300px;
   height: 100%;
   font-size: 30px;
   text-align: center;
@@ -21,6 +21,12 @@
 
 .TaskInput .isStarted {
   cursor: not-allowed;
+}
+
+.SpeakerBtn {
+  width: 90px;
+  height: 100%;
+  background-color: #e5e5e5;
 }
 
 .RecordBtn {

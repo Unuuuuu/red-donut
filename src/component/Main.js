@@ -17,6 +17,12 @@ export const STATUS = {
   BREAK: 2,
 };
 
+export const VOLUME = {
+  MUTE: 0,
+  MEDIUM: 50,
+  HIGH: 100,
+};
+
 const MainContext = React.createContext({
   sec: null,
   setSec: () => {},
@@ -34,6 +40,8 @@ const MainContext = React.createContext({
   setTaskArr: () => {},
   pomoNum: 0,
   setPomoNum: () => {},
+  vol: 50,
+  setVol: () => {},
 });
 
 export const useMainContext = () => useContext(MainContext);
@@ -47,6 +55,7 @@ const Main = () => {
   const [currentTask, setCurrentTask] = useState("");
   const [taskArr, setTaskArr] = useState([]);
   const [pomoNum, setPomoNum] = useState(0);
+  const [vol, setVol] = useState(50);
   return (
     <MainContext.Provider
       value={{
@@ -66,6 +75,8 @@ const Main = () => {
         setTaskArr,
         pomoNum,
         setPomoNum,
+        vol,
+        setVol,
       }}
     >
       <div className="Main">

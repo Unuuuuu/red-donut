@@ -1,9 +1,6 @@
 import React from "react";
 import classNames from "classnames";
-import { useMainContext } from "./Main";
-// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-// import { faFile } from "@fortawesome/free-solid-svg-icons";
-// import { faFile as faFileRegular } from "@fortawesome/free-regular-svg-icons";
+import { useMainContext, VOLUME } from "./Main";
 import "./TaskInput.css";
 
 const TaskInput = () => {
@@ -12,6 +9,8 @@ const TaskInput = () => {
     setIsStarted,
     currentTask,
     setCurrentTask,
+    vol,
+    setVol,
   } = useMainContext();
   return (
     <div className="TaskInput">
@@ -25,11 +24,34 @@ const TaskInput = () => {
         value={currentTask}
         readOnly={isStarted}
       ></input>
+      <button
+        className="SpeakerBtn btn"
+        onClick={() => {
+          if (vol === VOLUME.MEDIUM) setVol(100);
+          else if (vol === VOLUME.HIGH) setVol(0);
+          else if (vol === VOLUME.MUTE) setVol(50);
+        }}
+      >
+        {vol === VOLUME.MUTE && (
+          <span role="img" aria-label="speaker">
+            🔈
+          </span>
+        )}
+        {vol === VOLUME.MEDIUM && (
+          <span role="img" aria-label="speaker">
+            🔉
+          </span>
+        )}
+        {vol === VOLUME.HIGH && (
+          <span role="img" aria-label="speaker">
+            🔊
+          </span>
+        )}
+      </button>
       <button className="RecordBtn btn">
         <span role="img" aria-label="record">
           📜
         </span>
-        {/* <FontAwesomeIcon icon={faFile} size="10px" color="gray" /> */}
       </button>
     </div>
   );

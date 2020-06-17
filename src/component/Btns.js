@@ -1,11 +1,18 @@
-import React, { useRef, useEffect, useCallback } from "react";
-import classNames from "classnames";
+import React, { useRef, useEffect, useCallback, useState } from "react";
 import { useMainContext, STATUS, MODE } from "./Main";
+import Sound from "react-sound";
+import work from "../assets/work.mp3";
+import rest from "../assets/break.mp3";
+import end from "../assets/end2.mp3";
+import classNames from "classnames";
 import min30img from "../img/min301024.png";
 import min60img from "../img/min601024.png";
 import "./Btns.css";
 
 const Btns = () => {
+  const [playWorkStatus, setPlayWorkStatus] = useState("STOPPED");
+  const [playRestStatus, setPlayRestStatus] = useState("STOPPED");
+  const [playEndStatus, setPlayEndStatus] = useState("STOPPED");
   const {
     sec,
     setSec,
@@ -23,6 +30,7 @@ const Btns = () => {
     setTaskArr,
     pomoNum,
     setPomoNum,
+    vol,
   } = useMainContext();
   const timeoutRef = useRef(null);
   const isFirstLoadOrResume = useCallback(() => sec === null, [sec]);
@@ -33,32 +41,50 @@ const Btns = () => {
     setSec(null);
     setCurrentTask("");
     setCurrentStatus(STATUS.DEFAULT);
+    setPlayWorkStatus("STOPPED");
+    setPlayRestStatus("STOPPED");
+    setPlayEndStatus("PLAYING");
     clearTimeout(timeoutRef.current);
-  }, [setIsStarted, setIsPaused, setSec, setCurrentTask, setCurrentStatus]);
-  const MIN5 = 1;
-  const MIN10 = 1;
-  const MIN25 = 1;
-  const MIN50 = 1;
+  }, [
+    setIsStarted,
+    setIsPaused,
+    setSec,
+    setCurrentTask,
+    setCurrentStatus,
+    setPlayWorkStatus,
+    setPlayRestStatus,
+  ]);
+  const MIN5 = 5;
+  const MIN10 = 5;
+  const MIN25 = 5;
+  const MIN50 = 5;
 
   useEffect(() => {
     if (isStarted) {
       if (isFirstLoadOrResume()) {
         if (currentMode === MODE.MIN30) {
           setCurrentStatus(STATUS.WORK);
+          setPlayWorkStatus("PLAYING");
           setSec(MIN25);
         }
         if (currentMode === MODE.MIN60) {
           setCurrentStatus(STATUS.WORK);
+          setPlayWorkStatus("PLAYING");
           setSec(MIN50);
         }
         return;
       } else if (isSecZero()) {
+        setPlayEndStatus("PLAYING");
         if (currentStatus === STATUS.WORK) {
           if (currentMode === MODE.MIN30) {
             setCurrentStatus(STATUS.BREAK);
+            setPlayWorkStatus("STOPPED");
+            setPlayRestStatus("PLAYING");
             setSec(MIN5);
           } else if (currentMode === MODE.MIN60) {
             setCurrentStatus(STATUS.BREAK);
+            setPlayWorkStatus("STOPPED");
+            setPlayRestStatus("PLAYING");
             setSec(MIN10);
           }
         } else if (currentStatus === STATUS.BREAK) {
@@ -69,9 +95,14 @@ const Btns = () => {
         return;
       }
       if (isPaused) {
+        setPlayWorkStatus("PAUSED");
+        setPlayRestStatus("PAUSED");
         clearTimeout(timeoutRef.current);
         return;
-      }
+      } else if (!isPaused && currentStatus === STATUS.WORK)
+        setPlayWorkStatus("PLAYING");
+      else if (!isPaused && currentStatus === STATUS.BREAK)
+        setPlayRestStatus("PLAYING");
       timeoutRef.current = setTimeout(() => {
         setSec(sec - 1);
       }, 1000);
@@ -97,10 +128,20 @@ const Btns = () => {
     taskArr,
     pomoNum,
     setPomoNum,
+    setPlayWorkStatus,
+    setPlayRestStatus,
   ]);
 
   return (
     <div className="Btns">
+      <Sound url={work} volume={vol} playStatus={playWorkStatus} />
+      <Sound url={rest} volume={vol} playStatus={playRestStatus} />
+      <Sound
+        url={end}
+        volume={vol}
+        playStatus={playEndStatus}
+        onFinishedPlaying={() => setPlayEndStatus("STOPPED")}
+      />
       {isStarted && isPaused && (
         <button
           className="resume-btn btn"
