@@ -1,9 +1,9 @@
 import React from "react";
 import classNames from "classnames";
 import { useMainContext, VOLUME } from "./Main";
-import "./TaskInput.css";
+import "./Interaction.css";
 
-const TaskInput = () => {
+const Interaction = () => {
   const {
     isStarted,
     setIsStarted,
@@ -13,9 +13,9 @@ const TaskInput = () => {
     setVol,
   } = useMainContext();
   return (
-    <div className="TaskInput">
+    <div className="interaction-comp">
       <input
-        className={classNames("input", { isStarted })}
+        className={classNames("task-input", { "is-started": isStarted })}
         placeholder="Task"
         onChange={(e) => setCurrentTask(e.target.value)}
         onKeyDown={(e) => {
@@ -25,7 +25,7 @@ const TaskInput = () => {
         readOnly={isStarted}
       ></input>
       <button
-        className="SpeakerBtn btn"
+        className="speaker-btn btn"
         onClick={() => {
           if (vol === VOLUME.MEDIUM) setVol(100);
           else if (vol === VOLUME.HIGH) setVol(0);
@@ -48,7 +48,7 @@ const TaskInput = () => {
           </span>
         )}
       </button>
-      <button className="RecordBtn btn">
+      <button className="record-btn btn">
         <span role="img" aria-label="record">
           📜
         </span>
@@ -57,4 +57,4 @@ const TaskInput = () => {
   );
 };
 
-export default TaskInput;
+export default Interaction;

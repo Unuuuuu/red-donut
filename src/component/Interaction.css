@@ -1,10 +1,10 @@
-.TaskInput {
+.interaction-comp {
   height: 90px;
   display: flex;
   justify-content: space-between;
 }
 
-.TaskInput .input {
+.interaction-comp .task-input {
   width: 300px;
   height: 100%;
   font-size: 30px;
@@ -14,22 +14,22 @@
   border-radius: 12px;
 }
 
-.TaskInput .input:focus {
+.interaction-comp .task-input:focus {
   border: none;
   outline: none;
 }
 
-.TaskInput .isStarted {
+.interaction-comp .is-started {
   cursor: not-allowed;
 }
 
-.SpeakerBtn {
+.speaker-btn {
   width: 90px;
   height: 100%;
   background-color: #e5e5e5;
 }
 
-.RecordBtn {
+.record-btn {
   width: 90px;
   height: 100%;
   background-color: #e5e5e5;

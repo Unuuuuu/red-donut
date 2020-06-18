@@ -1,18 +1,18 @@
-.Main {
+.main-comp {
   display: flex;
   justify-content: space-between;
   width: 1010px;
   height: 700px;
 }
 
-.ClockContainer {
+.main-comp .clock-and-interaction-container {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   width: 500px;
 }
 
-.RecordContainer {
+.main-comp .task-list-and-record-container {
   display: flex;
   flex-direction: column;
   justify-content: space-between;

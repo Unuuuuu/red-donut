@@ -69,7 +69,7 @@ const Clock = () => {
   }, [sec, isStarted, isPaused, currentStatus]);
 
   return (
-    <div className="Clock">
+    <div className="clock-comp">
       <canvas ref={ref} style={{ width: "450px", height: "450px" }} />
     </div>
   );

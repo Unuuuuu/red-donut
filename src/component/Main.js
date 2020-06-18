@@ -1,8 +1,8 @@
 import React, { useState, useContext } from "react";
 import Clock from "./Clock";
-import Btns from "./Btns";
-import TaskInput from "./TaskInput";
-import Task from "./Task";
+import ClockControlBtn from "./ClockControlBtn";
+import Interaction from "./Interaction";
+import TaskList from "./TaskList";
 import Record from "./Record";
 import "./Main.css";
 
@@ -79,14 +79,14 @@ const Main = () => {
         setVol,
       }}
     >
-      <div className="Main">
-        <div className="ClockContainer">
+      <div className="main-comp">
+        <div className="clock-and-interaction-container">
           <Clock />
-          <Btns />
-          <TaskInput />
+          <ClockControlBtn />
+          <Interaction />
         </div>
-        <div className="RecordContainer">
-          <Task />
+        <div className="task-list-and-record-container">
+          <TaskList />
           <Record />
         </div>
       </div>

@@ -7,9 +7,9 @@ import end from "../assets/end2.mp3";
 import classNames from "classnames";
 import min30img from "../img/min301024.png";
 import min60img from "../img/min601024.png";
-import "./Btns.css";
+import "./ClockControlBtn.css";
 
-const Btns = () => {
+const ClockControlBtn = () => {
   const [playWorkStatus, setPlayWorkStatus] = useState("STOPPED");
   const [playRestStatus, setPlayRestStatus] = useState("STOPPED");
   const [playEndStatus, setPlayEndStatus] = useState("STOPPED");
@@ -56,7 +56,7 @@ const Btns = () => {
   ]);
   const MIN5 = 5;
   const MIN10 = 5;
-  const MIN25 = 5;
+  const MIN25 = 25 * 60;
   const MIN50 = 5;
 
   useEffect(() => {
@@ -133,7 +133,7 @@ const Btns = () => {
   ]);
 
   return (
-    <div className="Btns">
+    <div className="clock-control-btn-comp">
       <Sound url={work} volume={vol} playStatus={playWorkStatus} />
       <Sound url={rest} volume={vol} playStatus={playRestStatus} />
       <Sound
@@ -210,4 +210,4 @@ const Btns = () => {
   );
 };
 
-export default Btns;
+export default ClockControlBtn;

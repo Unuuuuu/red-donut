@@ -1,7 +1,11 @@
-.Btns {
+.clock-control-btn-comp {
+  height: 90px;
   display: flex;
   justify-content: space-between;
-  height: 90px;
+}
+
+.clock-control-btn-comp .clicked {
+  background-color: #d3d3d3;
 }
 
 .btn {
@@ -17,8 +21,8 @@
   background-color: #dcdcdc;
 }
 
-.Btns .clicked {
-  background-color: #d3d3d3;
+.btn img {
+  width: 60px;
 }
 
 .start-btn {
@@ -27,14 +31,10 @@
 
 .min30-btn,
 .min60-btn {
+  width: 90px;
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 90px;
-}
-
-.btn img {
-  width: 60px;
 }
 
 .resume-btn,

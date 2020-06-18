@@ -2,17 +2,17 @@ import React from "react";
 import { useMainContext, MODE } from "./Main";
 import classNames from "classnames";
 import numWords from "num-words";
-import "./Task.css";
+import "./TaskList.css";
 
 const Task = () => {
   const { taskArr, pomoNum } = useMainContext();
   const amountInWords = numWords(pomoNum);
   return (
-    <div className="Task">
-      <div className="TaskListAndRecordContainer">
-        <div className="TaskListContainer">
+    <div className="task-list-comp">
+      <div className="task-list-container">
+        <div className="task-list">
           {taskArr.map((v) => (
-            <div className="TaskContainer">
+            <div className="task-box">
               <div
                 className={classNames(
                   "box",
@@ -27,7 +27,7 @@ const Task = () => {
         {taskArr.length !== 0 && (
           <>
             <div className="border"></div>
-            <div className="record">
+            <div className="day-and-number">
               <span style={{ color: "black", fontWeight: "bold" }}>
                 {amountInWords}
               </span>
@@ -38,7 +38,7 @@ const Task = () => {
             </div>
           </>
         )}
-        {taskArr.length === 0 && <div class="title">Task List</div>}
+        {taskArr.length === 0 && <div class="task-list-title">Task List</div>}
       </div>
     </div>
   );

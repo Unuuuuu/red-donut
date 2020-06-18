@@ -4,9 +4,9 @@ import "./Pomodoro.css";
 
 const Pomodoro = () => {
   return (
-    <div className="Pomodoro">
-      <header className="Header">
-        <div className="title">
+    <div className="pomodoro-comp">
+      <div className="pomodoro-header">
+        <div className="pomodoro-title">
           <span style={{ color: "#e25a5a" }}>Red</span>
           <span style={{ color: "#00cc58" }}>
             {" "}
@@ -16,7 +16,7 @@ const Pomodoro = () => {
             </span>
           </span>
         </div>
-      </header>
+      </div>
       <Main />
     </div>
   );
