@@ -28,8 +28,6 @@ const ClockControlBtn = () => {
     setCurrentTask,
     taskArr,
     setTaskArr,
-    pomoNum,
-    setPomoNum,
     vol,
   } = useMainContext();
   const timeoutRef = useRef(null);
@@ -55,9 +53,9 @@ const ClockControlBtn = () => {
     setPlayRestStatus,
   ]);
   const MIN5 = 5;
-  const MIN10 = 5;
+  const MIN10 = 1;
   const MIN25 = 25 * 60;
-  const MIN50 = 5;
+  const MIN50 = 1;
 
   useEffect(() => {
     if (isStarted) {
@@ -88,8 +86,15 @@ const ClockControlBtn = () => {
             setSec(MIN10);
           }
         } else if (currentStatus === STATUS.BREAK) {
-          setTaskArr([...taskArr, { task: currentTask, mode: currentMode }]);
-          setPomoNum(pomoNum + currentMode);
+          setTaskArr([
+            ...taskArr,
+            {
+              task: currentTask,
+              mode: currentMode,
+              time: new Date().getTime(),
+            },
+          ]);
+          // setPomoNum(pomoNum + currentMode);
           handleReset();
         }
         return;
@@ -126,8 +131,6 @@ const ClockControlBtn = () => {
     setSec,
     setTaskArr,
     taskArr,
-    pomoNum,
-    setPomoNum,
     setPlayWorkStatus,
     setPlayRestStatus,
   ]);
@@ -149,7 +152,7 @@ const ClockControlBtn = () => {
             setIsPaused(false);
           }}
         >
-          resume
+          Resume
         </button>
       )}
       {isStarted && !isPaused && (
@@ -159,7 +162,7 @@ const ClockControlBtn = () => {
             setIsPaused(true);
           }}
         >
-          pause
+          Pause
         </button>
       )}
       {isStarted && (
@@ -169,7 +172,7 @@ const ClockControlBtn = () => {
             handleReset();
           }}
         >
-          reset
+          Reset
         </button>
       )}
       {!isStarted && (

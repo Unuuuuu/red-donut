@@ -36,10 +36,8 @@ const MainContext = React.createContext({
   setCurrentStatus: () => {},
   currentTask: "",
   setCurretTask: () => {},
-  taskArr: [],
+  taskArr: [{ task: "dd", mode: 2, time: 1492718346338 }],
   setTaskArr: () => {},
-  pomoNum: 0,
-  setPomoNum: () => {},
   vol: 50,
   setVol: () => {},
 });
@@ -53,8 +51,9 @@ const Main = () => {
   const [currentMode, setCurrentMode] = useState(MODE.MIN30);
   const [currentStatus, setCurrentStatus] = useState(STATUS.DEFAULT);
   const [currentTask, setCurrentTask] = useState("");
-  const [taskArr, setTaskArr] = useState([]);
-  const [pomoNum, setPomoNum] = useState(0);
+  const [taskArr, setTaskArr] = useState([
+    { task: "dd", mode: 2, time: 1492718346338 },
+  ]);
   const [vol, setVol] = useState(50);
   return (
     <MainContext.Provider
@@ -73,8 +72,6 @@ const Main = () => {
         setCurrentTask,
         taskArr,
         setTaskArr,
-        pomoNum,
-        setPomoNum,
         vol,
         setVol,
       }}
