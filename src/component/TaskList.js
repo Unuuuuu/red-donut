@@ -29,9 +29,6 @@ const Task = () => {
             <div className="day-and-number">
               {new Date(v[0].time).toLocaleDateString()}
               <div>
-                {/* <span style={{ color: "black", fontWeight: "bold" }}>
-              {amountInWords}
-            </span> */}
                 <span>{numWords(v.reduce((a, c) => a + c.mode, 0))}</span>
                 <span> </span>
                 <span role="img" aria-label="donut">
@@ -56,46 +53,6 @@ const Task = () => {
             <div className="border"></div>
           </>
         ))}
-        {/* {taskArr.length !== 0 && ({
-          timeArr.map((v)=>{
-            for(const ele of taskArr){
-              if(v === ele.time){
-                return <div></div>
-              }
-        }}}
-          <>
-            <div className="task-list">
-              {taskArr.map((v) => (
-                <div className="task-box">
-                  <div
-                    className={classNames(
-                      "box",
-                      { min30: v["mode"] === MODE.MIN30 },
-                      { min60: v["mode"] === MODE.MIN60 }
-                    )}
-                  ></div>
-                  <div className="task-arr">{v["task"]}</div>
-                </div>
-              ))}
-            </div>
-            <div className="border"></div>
-            <div className="day-and-number">
-              {taskArr.map((v) => (
-                <span>{v["time"]}</span>
-              ))}
-              {console.log(taskArr[0].time)}
-              <div>
-                <span style={{ color: "black", fontWeight: "bold" }}>
-                  {amountInWords}
-                </span>
-                <span> </span>
-                <span role="img" aria-label="donut">
-                  🍩
-                </span>
-              </div>
-            </div>
-          </>
-        )} */}
         {taskArr.length === 0 && <div class="task-list-title">Task List</div>}
       </div>
     </div>

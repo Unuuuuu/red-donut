@@ -3,4 +3,53 @@
   height: 190px;
   background-color: #e5e5e5;
   border-radius: 12px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 12px;
+}
+
+.record-comp .record-container {
+  display: flex;
+  width: 450px;
+  height: 140px;
+  overflow: auto;
+}
+
+.record-comp .blank-day-container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.record-comp .blank {
+  width: 40px;
+  height: 40px;
+}
+
+.record-comp .day {
+  width: 40px;
+  height: 100px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  text-align: center;
+}
+
+.record-comp .month-boxes-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.record-comp .month {
+  display: flex;
+  justify-content: space-between;
+  line-height: 40px;
+  height: 40px;
+}
+
+.record-comp .month-ele{
+  width:20px;
+  margin-right:10px;
 }
