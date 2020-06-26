@@ -1,26 +1,37 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useMainContext, MODE } from "./Main";
 import classNames from "classnames";
 import numWords from "num-words";
 import "./TaskList.css";
 
 const Task = () => {
-  const { taskArr } = useMainContext();
-  const timeArr = [];
-  for (let i = 0; i < taskArr.length; i++) {
-    if (!timeArr.includes(new Date(taskArr[i].time).toLocaleDateString()))
-      timeArr.push(new Date(taskArr[i].time).toLocaleDateString());
-  }
-  const groupArr = [];
-  for (let i = 0; i < timeArr.length; i++) {
-    groupArr.push(
-      taskArr.filter(
-        (v) => new Date(v.time).toLocaleDateString() === timeArr[i]
-      )
-    );
-  }
+  const {
+    taskArr,
+    timeArr,
+    setTimeArr,
+    groupArr,
+    setGroupArr,
+  } = useMainContext();
 
-  console.log(groupArr);
+  useEffect(() => {
+    for (let i = 0; i < taskArr.length; i++) {
+      if (!timeArr.includes(new Date(taskArr[i].time).toLocaleDateString()))
+        setTimeArr([
+          ...timeArr,
+          new Date(taskArr[i].time).toLocaleDateString(),
+        ]);
+    }
+    const arr = [];
+    for (let i = 0; i < timeArr.length; i++) {
+      arr.push(
+        taskArr.filter(
+          (v) => new Date(v.time).toLocaleDateString() === timeArr[i]
+        )
+      );
+    }
+    setGroupArr(arr);
+  }, [taskArr, timeArr, setGroupArr, setTimeArr]);
+
   return (
     <div className="task-list-comp">
       <div className="task-list-container">

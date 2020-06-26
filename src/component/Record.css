@@ -1,7 +1,7 @@
 .record-comp {
   width: 100%;
   height: 190px;
-  background-color: #e5e5e5;
+  background-color: #e8e8e8;
   border-radius: 12px;
   display: flex;
   justify-content: center;
@@ -14,42 +14,49 @@
   width: 450px;
   height: 140px;
   overflow: auto;
+  justify-content: space-between;
 }
 
-.record-comp .blank-day-container {
+.record-comp .month-container {
+  width: 133px;
   height: 100%;
   display: flex;
   flex-direction: column;
 }
 
-.record-comp .blank {
-  width: 40px;
-  height: 40px;
+.record-comp .month-title {
+  height: 18px;
+  margin-bottom: 3px;
 }
 
-.record-comp .day {
-  width: 40px;
-  height: 100px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-evenly;
-  text-align: center;
-}
-
-.record-comp .month-boxes-container {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-}
-
-.record-comp .month {
+.record-comp .month-days {
   display: flex;
   justify-content: space-between;
-  line-height: 40px;
-  height: 40px;
+  margin-bottom: 5px;
 }
 
-.record-comp .month-ele{
-  width:20px;
-  margin-right:10px;
+.record-comp .month-calendar {
+  height: 112px;
+  display: flex;
+  flex-direction: column;
+}
+
+.record-comp .calendar-row {
+  display: flex;
+  justify-content: space-between;
+}
+
+.record-comp .calendar-blank {
+  width: 12px;
+  height: 12px;
+  border-radius: 3px;
+  margin-bottom: 5px;
+}
+
+.record-comp .calendar-date {
+  width: 12px;
+  height: 12px;
+  background: #c0c0c0;
+  border-radius: 3px;
+  margin-bottom: 5px;
 }

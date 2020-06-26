@@ -9,7 +9,7 @@
   height: 100%;
   font-size: 30px;
   text-align: center;
-  background-color: #e5e5e5;
+  background-color: #e8e8e8;
   border: none;
   border-radius: 12px;
 }
@@ -26,12 +26,12 @@
 .speaker-btn {
   width: 90px;
   height: 100%;
-  background-color: #e5e5e5;
+  background-color: #e8e8e8;
 }
 
 .record-btn {
   width: 90px;
   height: 100%;
-  background-color: #e5e5e5;
+  background-color: #e8e8e8;
   cursor: not-allowed;
 }

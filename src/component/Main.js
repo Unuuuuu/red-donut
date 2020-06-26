@@ -36,10 +36,19 @@ const MainContext = React.createContext({
   setCurrentStatus: () => {},
   currentTask: "",
   setCurretTask: () => {},
-  taskArr: [{ task: "dd", mode: 2, time: 1492718346338 }],
+  taskArr: [
+    { task: "test", mode: 1, time: 1593000528494 },
+    { task: "test2", mode: 1, time: 1593000528494 },
+    { task: "test3", mode: 1, time: 1590409308205 },
+    { task: "dd", mode: 2, time: 1492718346338 },
+  ],
   setTaskArr: () => {},
   vol: 50,
   setVol: () => {},
+  timeArr: [],
+  setTimeArr: () => {},
+  groupArr: [],
+  setGroupArr: () => {},
 });
 
 export const useMainContext = () => useContext(MainContext);
@@ -52,8 +61,13 @@ const Main = () => {
   const [currentStatus, setCurrentStatus] = useState(STATUS.DEFAULT);
   const [currentTask, setCurrentTask] = useState("");
   const [taskArr, setTaskArr] = useState([
+    { task: "test", mode: 1, time: 1593000528494 },
+    { task: "test2", mode: 1, time: 1593000528494 },
+    { task: "test3", mode: 1, time: 1590409308205 },
     { task: "dd", mode: 2, time: 1492718346338 },
   ]);
+  const [timeArr, setTimeArr] = useState([]);
+  const [groupArr, setGroupArr] = useState([]);
   const [vol, setVol] = useState(50);
   return (
     <MainContext.Provider
@@ -74,6 +88,10 @@ const Main = () => {
         setTaskArr,
         vol,
         setVol,
+        timeArr,
+        setTimeArr,
+        groupArr,
+        setGroupArr,
       }}
     >
       <div className="main-comp">

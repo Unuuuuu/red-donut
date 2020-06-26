@@ -5,7 +5,7 @@
 }
 
 .clock-control-btn-comp .clicked {
-  background-color: #d3d3d3;
+  background-color: lightgray;
 }
 
 .btn {
@@ -13,12 +13,12 @@
   border-radius: 12px;
   font-size: 30px;
   outline: none;
-  background-color: #e5e5e5;
+  background-color: #e8e8e8;
   cursor: pointer;
 }
 
 .btn:hover {
-  background-color: #dcdcdc;
+  background-color: lightgray;
 }
 
 .btn img {
