@@ -35,7 +35,7 @@ const Task = () => {
   return (
     <div className="task-list-comp">
       <div className="task-list-container">
-        {groupArr.map((v) => (
+        {[...groupArr].reverse().map((v) => (
           <>
             <div className="day-and-number">
               {new Date(v[0].time).toLocaleDateString()}

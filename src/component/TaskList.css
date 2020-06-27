@@ -6,6 +6,7 @@
   align-items: center;
   background-color: #e8e8e8;
   border-radius: 12px;
+  overflow: auto;
 }
 
 .task-list-comp .task-list-container {
@@ -13,7 +14,6 @@
   height: 450px;
   display: flex;
   flex-direction: column;
-  overflow: auto;
 }
 
 .task-list-comp .task-list-title {
@@ -39,9 +39,10 @@
 }
 
 .task-list-comp .box {
-  width: 25px;
+  width: 5.55%;
   height: 25px;
   border-radius: 6px;
+  margin-right: 2.22%;
 }
 
 .task-list-comp .min30 {
@@ -53,18 +54,19 @@
 }
 
 .task-list-comp .task-arr {
-  width: 415px;
+  width: 92.22%;
   height: 25px;
   background: lightgray;
   border-radius: 6px;
   line-height: 25px;
   padding-left: 5px;
+  overflow: hidden;
 }
 
 .task-list-comp .border {
   width: 100%;
-  height: 1px;
-  background-color: darkgray;
+  height: 0px;
+  border-top: 1px solid silver;
   margin-bottom: 10px;
 }
 

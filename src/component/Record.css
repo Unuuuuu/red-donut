@@ -15,6 +15,7 @@
   height: 140px;
   overflow: auto;
   justify-content: space-between;
+  align-items: center;
 }
 
 .record-comp .month-container {
@@ -59,4 +60,70 @@
   background: #c0c0c0;
   border-radius: 3px;
   margin-bottom: 5px;
+}
+
+.record-comp .border {
+  width: 1px;
+  height: 100%;
+  background-color: lightgray;
+}
+
+.record-comp .mode-1 {
+  background-color: #ff8585;
+}
+
+.record-comp .mode-2 {
+  background-color: #ff7a7a;
+}
+
+.record-comp .mode-3 {
+  background-color: #ff7070;
+}
+
+.record-comp .mode-4 {
+  background-color: #ff6b6b;
+}
+
+.record-comp .mode-5 {
+  background-color: #ff6161;
+}
+
+.record-comp .mode-6 {
+  background-color: #ff5757;
+}
+
+.record-comp .mode-7 {
+  background-color: #ff4d4d;
+}
+
+.record-comp .mode-8 {
+  background-color: #ff4747;
+}
+
+.record-comp .mode-9 {
+  background-color: #ff3d3d;
+}
+
+.record-comp .mode-10 {
+  background-color: #ff3333;
+}
+
+.record-comp .mode-11 {
+  background-color: #ff2929;
+}
+
+.record-comp .mode-12 {
+  background-color: #ff1f1f;
+}
+
+.record-comp .mode-13 {
+  background-color: #ff1a1a;
+}
+
+.record-comp .mode-14 {
+  background-color: #ff0f0f;
+}
+
+.record-comp .mode-15 {
+  background-color: #ff0505;
 }
