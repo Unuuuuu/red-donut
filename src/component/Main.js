@@ -2,8 +2,8 @@ import React, { useState, useContext } from "react";
 import Clock from "./Clock";
 import ClockControlBtn from "./ClockControlBtn";
 import Interaction from "./Interaction";
-import TaskList from "./TaskList";
-import Record from "./Record";
+import Task from "./Task";
+import Calendar from "./Calendar";
 import "./Main.css";
 
 export const MODE = {
@@ -36,19 +36,10 @@ const MainContext = React.createContext({
   setCurrentStatus: () => {},
   currentTask: "",
   setCurretTask: () => {},
-  taskArr: [
-    { task: "test", mode: 1, time: 1593000528494 },
-    { task: "test2", mode: 1, time: 1593000528494 },
-    { task: "test3", mode: 1, time: 1590409308205 },
-    { task: "dd", mode: 2, time: 1492718346338 },
-  ],
-  setTaskArr: () => {},
+  tasks: [],
+  setTasks: () => {},
   vol: 50,
   setVol: () => {},
-  timeArr: [],
-  setTimeArr: () => {},
-  groupArr: [],
-  setGroupArr: () => {},
 });
 
 export const useMainContext = () => useContext(MainContext);
@@ -60,15 +51,13 @@ const Main = () => {
   const [currentMode, setCurrentMode] = useState(MODE.MIN30);
   const [currentStatus, setCurrentStatus] = useState(STATUS.DEFAULT);
   const [currentTask, setCurrentTask] = useState("");
-  const [taskArr, setTaskArr] = useState([
+  const [tasks, setTasks] = useState([
     { task: "test", mode: 1, time: 1593000528494 },
     { task: "test2", mode: 1, time: 1593000528494 },
     { task: "test3", mode: 1, time: 1590409308205 },
     { task: "dd", mode: 2, time: 1492718346338 },
   ]);
-  const [timeArr, setTimeArr] = useState([]);
-  const [groupArr, setGroupArr] = useState([]);
-  const [vol, setVol] = useState(50);
+  const [vol, setVol] = useState(VOLUME.MEDIUM);
   return (
     <MainContext.Provider
       value={{
@@ -84,14 +73,10 @@ const Main = () => {
         setCurrentStatus,
         currentTask,
         setCurrentTask,
-        taskArr,
-        setTaskArr,
+        tasks,
+        setTasks,
         vol,
         setVol,
-        timeArr,
-        setTimeArr,
-        groupArr,
-        setGroupArr,
       }}
     >
       <div className="main-comp">
@@ -100,9 +85,9 @@ const Main = () => {
           <ClockControlBtn />
           <Interaction />
         </div>
-        <div className="task-list-and-record-container">
-          <TaskList />
-          <Record />
+        <div className="task-list-and-calendar-container">
+          <Task />
+          <Calendar />
         </div>
       </div>
     </MainContext.Provider>

@@ -6,7 +6,7 @@ import {
   drawClockLine,
   drawGauge,
   printText,
-} from "../util";
+} from "../util/clockUtil";
 import "./Clock.css";
 
 const Clock = () => {

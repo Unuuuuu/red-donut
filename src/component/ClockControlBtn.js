@@ -26,8 +26,8 @@ const ClockControlBtn = () => {
     setCurrentStatus,
     currentTask,
     setCurrentTask,
-    taskArr,
-    setTaskArr,
+    tasks,
+    setTasks,
     vol,
   } = useMainContext();
   const timeoutRef = useRef(null);
@@ -86,8 +86,8 @@ const ClockControlBtn = () => {
             setSec(MIN10);
           }
         } else if (currentStatus === STATUS.BREAK) {
-          setTaskArr([
-            ...taskArr,
+          setTasks([
+            ...tasks,
             {
               task: currentTask,
               mode: currentMode,
@@ -129,8 +129,8 @@ const ClockControlBtn = () => {
     setCurrentMode,
     setCurrentStatus,
     setSec,
-    setTaskArr,
-    taskArr,
+    setTasks,
+    tasks,
     setPlayWorkStatus,
     setPlayRestStatus,
   ]);

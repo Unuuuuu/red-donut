@@ -12,7 +12,7 @@
   width: 500px;
 }
 
-.main-comp .task-list-and-record-container {
+.main-comp .task-list-and-calendar-container {
   display: flex;
   flex-direction: column;
   justify-content: space-between;

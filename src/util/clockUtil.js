@@ -1,6 +1,6 @@
 import { STATUS } from "../component/Main";
 
-export const pad = (num) => {
+const pad = (num) => {
   if (num < 10) return `0${num}`;
   else return num;
 };
