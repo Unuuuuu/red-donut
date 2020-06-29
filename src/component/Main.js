@@ -52,10 +52,11 @@ const Main = () => {
   const [currentStatus, setCurrentStatus] = useState(STATUS.DEFAULT);
   const [currentTask, setCurrentTask] = useState("");
   const [tasks, setTasks] = useState([
+    { task: "test", mode: 2, time: 1492718346338 },
+    { task: "test", mode: 1, time: 1590409308205 },
+    { task: "test", mode: 2, time: 1592548875108 },
     { task: "test", mode: 1, time: 1593000528494 },
-    { task: "test2", mode: 1, time: 1593000528494 },
-    { task: "test3", mode: 1, time: 1590409308205 },
-    { task: "dd", mode: 2, time: 1492718346338 },
+    { task: "test", mode: 1, time: 1593000528494 },
   ]);
   const [vol, setVol] = useState(VOLUME.MEDIUM);
   return (

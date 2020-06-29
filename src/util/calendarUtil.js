@@ -24,3 +24,13 @@ export const decideColor = (mode) => {
   else if (mode === 14) return "#ff0f0f";
   else if (mode >= 15) return "#ff0505";
 };
+
+const isLeapYear = (year) => {
+  return (year % 4 === 0 && year % 100 !== 0) || year % 400 === 0;
+};
+
+const FULL_DATES = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+export const getLastDateFromYearAndMonth = (year, month) => {
+  if (month === 1 && isLeapYear(year)) return 29;
+  return FULL_DATES[month];
+};

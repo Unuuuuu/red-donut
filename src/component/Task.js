@@ -8,13 +8,11 @@ import TaskList from "./TaskList";
 const Task = () => {
   const { tasks } = useMainContext();
 
-  const groupedTasksByDate = useMemo(() => getGroupedTasksByDate(tasks), [
-    tasks,
-  ]);
+  const groupedTasksByDate = useMemo(() => getGroupedTasksByDate(tasks), [tasks]);
 
   return (
     <div className="task">
-      {groupedTasksByDate.map((taskByDate) => (
+      {[...groupedTasksByDate].reverse().map((taskByDate) => (
         <>
           <DateAndNumber taskByDate={taskByDate} />
           {taskByDate.map((task) => (
