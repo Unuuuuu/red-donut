@@ -30,3 +30,23 @@
   font-size: 55px;
   letter-spacing: 5px;
 }
+
+@media screen and (max-width: 1010px) {
+  .pomodoro-comp {
+    width: auto;
+    height: auto;
+    padding: 4%;
+  }
+
+  .pomodoro-comp .pomodoro-header {
+    width: 100%;
+    height: 40px;
+    justify-content: flex-start;
+    margin-bottom: 2.5%;
+  }
+
+  .pomodoro-header .pomodoro-title {
+    line-height: 40px;
+    font-size: 30px;
+  }
+}

@@ -1,12 +1,6 @@
 import React, { useRef, useEffect } from "react";
 import { useMainContext } from "./Main";
-import {
-  getPixelRatio,
-  drawClock,
-  drawClockLine,
-  drawGauge,
-  printText,
-} from "../util/clockUtil";
+import { getPixelRatio, drawClock, drawClockLine, drawGauge, printText } from "../util/clockUtil";
 import "./Clock.css";
 
 const Clock = () => {
@@ -19,9 +13,7 @@ const Clock = () => {
     let requestId;
     let ratio = getPixelRatio(ctx);
     let width = getComputedStyle(canvas).getPropertyValue("width").slice(0, -2);
-    let height = getComputedStyle(canvas)
-      .getPropertyValue("height")
-      .slice(0, -2);
+    let height = getComputedStyle(canvas).getPropertyValue("height").slice(0, -2);
     canvas.width = width * ratio;
     canvas.height = height * ratio;
     canvas.style.width = `${width}px`;
@@ -69,9 +61,12 @@ const Clock = () => {
   }, [sec, isStarted, isPaused, currentStatus]);
 
   return (
-    <div className="clock-comp">
-      <canvas ref={ref} style={{ width: "450px", height: "450px" }} />
-    </div>
+    <>
+      <div className="clock-comp">
+        {window.screen.width > 1010 && <canvas ref={ref} className="canvas" style={{ width: "450px", height: "450px" }} />}
+        {window.screen.width <= 1010 && <canvas ref={ref} className="canvas" style={{ width: "300px", height: "300px" }} />}
+      </div>
+    </>
   );
 };
 

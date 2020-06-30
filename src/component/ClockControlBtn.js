@@ -43,15 +43,7 @@ const ClockControlBtn = () => {
     setPlayRestStatus("STOPPED");
     setPlayEndStatus("PLAYING");
     clearTimeout(timeoutRef.current);
-  }, [
-    setIsStarted,
-    setIsPaused,
-    setSec,
-    setCurrentTask,
-    setCurrentStatus,
-    setPlayWorkStatus,
-    setPlayRestStatus,
-  ]);
+  }, [setIsStarted, setIsPaused, setSec, setCurrentTask, setCurrentStatus, setPlayWorkStatus, setPlayRestStatus]);
   const MIN5 = 5;
   const MIN10 = 1;
   const MIN25 = 25 * 60;
@@ -104,10 +96,8 @@ const ClockControlBtn = () => {
         setPlayRestStatus("PAUSED");
         clearTimeout(timeoutRef.current);
         return;
-      } else if (!isPaused && currentStatus === STATUS.WORK)
-        setPlayWorkStatus("PLAYING");
-      else if (!isPaused && currentStatus === STATUS.BREAK)
-        setPlayRestStatus("PLAYING");
+      } else if (!isPaused && currentStatus === STATUS.WORK) setPlayWorkStatus("PLAYING");
+      else if (!isPaused && currentStatus === STATUS.BREAK) setPlayRestStatus("PLAYING");
       timeoutRef.current = setTimeout(() => {
         setSec(sec - 1);
       }, 1000);
@@ -139,12 +129,7 @@ const ClockControlBtn = () => {
     <div className="clock-control-btn-comp">
       <Sound url={work} volume={vol} playStatus={playWorkStatus} />
       <Sound url={rest} volume={vol} playStatus={playRestStatus} />
-      <Sound
-        url={end}
-        volume={vol}
-        playStatus={playEndStatus}
-        onFinishedPlaying={() => setPlayEndStatus("STOPPED")}
-      />
+      <Sound url={end} volume={vol} playStatus={playEndStatus} onFinishedPlaying={() => setPlayEndStatus("STOPPED")} />
       {isStarted && isPaused && (
         <button
           className="resume-btn btn"
@@ -180,6 +165,7 @@ const ClockControlBtn = () => {
           className="start-btn btn"
           onClick={() => {
             setIsStarted(true);
+            setPlayEndStatus("STOP");
           }}
         >
           Start

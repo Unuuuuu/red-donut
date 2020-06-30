@@ -35,3 +35,20 @@
   background-color: #e8e8e8;
   cursor: not-allowed;
 }
+
+@media screen and (max-width: 1010px) {
+  .interaction-comp {
+    width: 100%;
+    height: 70px;
+  }
+
+  .interaction-comp .task-input {
+    width: calc(100% - 140px - 5%);
+  }
+
+  .interaction-comp .speaker-btn,
+  .record-btn {
+    width: 70px;
+    margin-left: 2.5%;
+  }
+}

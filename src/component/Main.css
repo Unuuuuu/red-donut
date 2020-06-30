@@ -18,3 +18,19 @@
   justify-content: space-between;
   width: 500px;
 }
+
+@media screen and (max-width: 1010px) {
+  .main-comp {
+    width: 100%;
+    height: auto;
+    flex-direction: column;
+  }
+  .main-comp .clock-and-interaction-container {
+    width: 100%;
+    margin-bottom: 2.5%;
+  }
+
+  .main-comp .task-list-and-calendar-container {
+    width: 100%;
+  }
+}

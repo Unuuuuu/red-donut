@@ -32,6 +32,7 @@
 .min30-btn,
 .min60-btn {
   width: 90px;
+  padding: 5px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -44,4 +45,30 @@
 
 .reset-btn {
   width: 190px;
+}
+
+@media screen and (max-width: 1010px) {
+  .clock-control-btn-comp {
+    height: 70px;
+    margin-bottom: 2.5%;
+  }
+
+  .clock-control-btn-comp .start-btn {
+    width: 100%;
+  }
+
+  .clock-control-btn-comp .min30-btn,
+  .min60-btn {
+    width: auto;
+    margin-left: 2.5%;
+  }
+
+  .clock-control-btn-comp .resume-btn,
+  .pause-btn {
+    width: calc(100% - 140px - 5%);
+  }
+
+  .clock-control-btn-comp .reset-btn {
+    width: calc(140px + 2.5%);
+  }
 }

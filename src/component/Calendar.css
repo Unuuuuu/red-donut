@@ -5,7 +5,7 @@
   border-radius: 12px;
   display: flex;
   font-size: 12px;
-  justify-content: space-between;
+  justify-content: space-evenly;
   overflow: auto;
   align-items: center;
   padding: 25px;
@@ -59,4 +59,24 @@
   width: 1px;
   height: 100%;
   background-color: lightgray;
+}
+
+@media screen and (max-width: 1010px) {
+  .calendar {
+    padding: 10px;
+    height: 135px;
+    font-size: 10px;
+  }
+
+  .calendar .calendar-border {
+    margin: 0px 10px;
+  }
+  .calendar .calendar-color-box {
+    width: 10px;
+    height: 10px;
+  }
+  .calendar .calendar-blank {
+    width: 10px;
+    height: 10px;
+  }
 }

@@ -3,6 +3,7 @@ import { getLastDateFromYearAndMonth } from "../util/calendarUtil";
 import { chunk, decideColor } from "../util/calendarUtil";
 import { useMainContext } from "../component/Main";
 import { getGroupedTasksByDate } from "../util/taskUtil";
+// import PopOver from "./PopOver";
 
 const CalendarItem = (props) => {
   const monthFirstDay = new Date(props.year, props.month, 1).getDay();
@@ -57,6 +58,8 @@ const CalendarItem = (props) => {
 
   const allDaysByTask = getAllDaysByTask(daysByDate);
 
+  // const [isMouseOver, setIsMouseOver] = useState(false);
+
   return (
     <div className="calendar-item">
       <div className="calendar-date">
@@ -72,11 +75,20 @@ const CalendarItem = (props) => {
         <div className="calendar-day">토</div>
       </div>
       <div className="calendar-color-boxes">
+        {/* <PopOver date={{ year: props.year, month: props.month }} isMouseOver={isMouseOver} /> */}
         {chunk(allDaysByTask).map((week) => (
           <div className="calendar-row">
             {week.map((day) => {
               if (day.date === 0) return <div className="calendar-blank"></div>;
-              else return <div className="calendar-color-box" style={{ backgroundColor: decideColor(day.mode) }}></div>;
+              else
+                return (
+                  <div
+                    className="calendar-color-box"
+                    style={{ backgroundColor: decideColor(day.mode) }}
+                    // onMouseEnter={() => setIsMouseOver(true)}
+                    // onMouseLeave={() => setIsMouseOver(false)}
+                  ></div>
+                );
             })}
           </div>
         ))}

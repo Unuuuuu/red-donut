@@ -1,0 +1,7 @@
+.pop-over {
+  width: 50px;
+  height: 50px;
+  background-color: red;
+  position: absolute;
+  opacity: 0.5;
+}
