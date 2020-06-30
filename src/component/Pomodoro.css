@@ -40,13 +40,12 @@
 
   .pomodoro-comp .pomodoro-header {
     width: 100%;
-    height: 40px;
-    justify-content: flex-start;
+    height: 70px;
     margin-bottom: 10px;
   }
 
   .pomodoro-header .pomodoro-title {
-    line-height: 40px;
+    line-height: 70px;
     font-size: 30px;
   }
 }
