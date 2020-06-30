@@ -50,7 +50,7 @@
 @media screen and (max-width: 1010px) {
   .clock-control-btn-comp {
     height: 70px;
-    margin-bottom: 2.5%;
+    margin-bottom: 10px;
   }
 
   .clock-control-btn-comp .start-btn {
@@ -59,16 +59,17 @@
 
   .clock-control-btn-comp .min30-btn,
   .min60-btn {
-    width: auto;
-    margin-left: 2.5%;
+    width: 70px;
+    margin-left: 10px;
   }
 
   .clock-control-btn-comp .resume-btn,
   .pause-btn {
-    width: calc(100% - 140px - 5%);
+    width: calc(100% - 160px);
   }
 
   .clock-control-btn-comp .reset-btn {
-    width: calc(140px + 2.5%);
+    width: 150px;
+    margin-left: 10px;
   }
 }

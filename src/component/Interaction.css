@@ -43,12 +43,12 @@
   }
 
   .interaction-comp .task-input {
-    width: calc(100% - 140px - 5%);
+    width: calc(100% - 160px);
   }
 
   .interaction-comp .speaker-btn,
   .record-btn {
     width: 70px;
-    margin-left: 2.5%;
+    margin-left: 10px;
   }
 }

@@ -35,14 +35,14 @@
   .pomodoro-comp {
     width: auto;
     height: auto;
-    padding: 4%;
+    padding: 15px;
   }
 
   .pomodoro-comp .pomodoro-header {
     width: 100%;
     height: 40px;
     justify-content: flex-start;
-    margin-bottom: 2.5%;
+    margin-bottom: 10px;
   }
 
   .pomodoro-header .pomodoro-title {
