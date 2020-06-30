@@ -6,7 +6,6 @@
   display: flex;
   font-size: 12px;
   justify-content: space-evenly;
-  overflow: auto;
   align-items: center;
   padding: 25px;
 }
@@ -59,6 +58,10 @@
   width: 1px;
   height: 100%;
   background-color: lightgray;
+}
+
+.calendar .calendar-color-box-container {
+  position: relative;
 }
 
 @media screen and (max-width: 1010px) {
