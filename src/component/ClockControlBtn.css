@@ -15,6 +15,7 @@
   outline: none;
   background-color: #e8e8e8;
   cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
 }
 
 .btn:hover {

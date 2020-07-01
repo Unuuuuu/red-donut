@@ -5,14 +5,13 @@
   font-size: 14px;
   font-weight: bold;
   color: black;
-  width: 122px;
+  width: 123px;
   height: 46px;
   top: -51px;
   background-color: rgba(105, 105, 105, 0.9);
   position: absolute;
   z-index: 1;
   border-radius: 3px;
-  word-spacing: -2.5px;
   padding-left: 6px;
   border-spacing: -10px;
 }

@@ -29,11 +29,16 @@
   background-color: #e8e8e8;
 }
 
-.record-btn {
+.test-true-btn,
+.test-false-btn {
   width: 90px;
   height: 100%;
   background-color: #e8e8e8;
-  cursor: not-allowed;
+  font-size: 20px;
+}
+
+.interaction-comp .test-true-btn {
+  background-color: lightgray;
 }
 
 @media screen and (max-width: 1010px) {
@@ -47,7 +52,8 @@
   }
 
   .interaction-comp .speaker-btn,
-  .record-btn {
+  .test-true-btn,
+  .test-false-btn {
     width: 70px;
     margin-left: 10px;
   }

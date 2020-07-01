@@ -1,17 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import classNames from "classnames";
 import { useMainContext, VOLUME } from "./Main";
 import "./Interaction.css";
 
 const Interaction = () => {
-  const {
-    isStarted,
-    setIsStarted,
-    currentTask,
-    setCurrentTask,
-    vol,
-    setVol,
-  } = useMainContext();
+  const { isStarted, setIsStarted, currentTask, setCurrentTask, vol, setVol, setMin5, setMin10, setMin25, setMin50 } = useMainContext();
+  const [isTestMode, setIsTestMode] = useState(false);
   return (
     <div className="interaction-comp">
       <input
@@ -48,11 +42,38 @@ const Interaction = () => {
           </span>
         )}
       </button>
-      <button className="record-btn btn">
-        <span role="img" aria-label="record">
-          📜
-        </span>
-      </button>
+      {isTestMode === true && (
+        <button
+          className={classNames("test-true-btn btn", { "is-started": isStarted })}
+          onClick={() => {
+            if (!isStarted) {
+              setMin5(5 * 60);
+              setMin10(10 * 60);
+              setMin25(25 * 60);
+              setMin50(50 * 60);
+              setIsTestMode(false);
+            }
+          }}
+        >
+          Test
+        </button>
+      )}
+      {isTestMode === false && (
+        <button
+          className={classNames("test-false-btn btn", { "is-started": isStarted })}
+          onClick={() => {
+            if (!isStarted) {
+              setMin5(1);
+              setMin10(1);
+              setMin25(1);
+              setMin50(1);
+              setIsTestMode(true);
+            }
+          }}
+        >
+          Test
+        </button>
+      )}
     </div>
   );
 };

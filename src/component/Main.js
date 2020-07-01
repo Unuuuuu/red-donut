@@ -40,6 +40,14 @@ const MainContext = React.createContext({
   setTasks: () => {},
   vol: 50,
   setVol: () => {},
+  min5: 0,
+  setMin5: () => {},
+  min10: 0,
+  setMin10: () => {},
+  min25: 0,
+  setMin25: () => {},
+  min50: 0,
+  setMin50: () => {},
 });
 
 export const useMainContext = () => useContext(MainContext);
@@ -51,14 +59,17 @@ const Main = () => {
   const [currentMode, setCurrentMode] = useState(MODE.MIN30);
   const [currentStatus, setCurrentStatus] = useState(STATUS.DEFAULT);
   const [currentTask, setCurrentTask] = useState("");
-  const [tasks, setTasks] = useState([
-    { task: "test", mode: 2, time: 1492718346338 },
-    { task: "test", mode: 1, time: 1590409308205 },
-    { task: "test", mode: 2, time: 1592548875108 },
-    { task: "test", mode: 1, time: 1593000528494 },
-    { task: "test", mode: 1, time: 1593000528494 },
-  ]);
+  const [tasks, setTasks] = useState(() => {
+    const item = localStorage.getItem("tasks");
+    console.log(item);
+    return item ? JSON.parse(item) : [];
+  });
   const [vol, setVol] = useState(VOLUME.MEDIUM);
+  const [min5, setMin5] = useState(5 * 60);
+  const [min10, setMin10] = useState(10 * 60);
+  const [min25, setMin25] = useState(25 * 60);
+  const [min50, setMin50] = useState(50 * 60);
+
   return (
     <MainContext.Provider
       value={{
@@ -78,6 +89,14 @@ const Main = () => {
         setTasks,
         vol,
         setVol,
+        min5,
+        setMin5,
+        min10,
+        setMin10,
+        min25,
+        setMin25,
+        min50,
+        setMin50,
       }}
     >
       <div className="main-comp">

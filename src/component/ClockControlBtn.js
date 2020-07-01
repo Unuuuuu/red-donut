@@ -29,6 +29,10 @@ const ClockControlBtn = () => {
     tasks,
     setTasks,
     vol,
+    min5,
+    min10,
+    min25,
+    min50,
   } = useMainContext();
   const timeoutRef = useRef(null);
   const isFirstLoadOrResume = useCallback(() => sec === null, [sec]);
@@ -44,10 +48,6 @@ const ClockControlBtn = () => {
     setPlayEndStatus("PLAYING");
     clearTimeout(timeoutRef.current);
   }, [setIsStarted, setIsPaused, setSec, setCurrentTask, setCurrentStatus, setPlayWorkStatus, setPlayRestStatus]);
-  const MIN5 = 5;
-  const MIN10 = 1;
-  const MIN25 = 25 * 60;
-  const MIN50 = 1;
 
   useEffect(() => {
     if (isStarted) {
@@ -55,12 +55,12 @@ const ClockControlBtn = () => {
         if (currentMode === MODE.MIN30) {
           setCurrentStatus(STATUS.WORK);
           setPlayWorkStatus("PLAYING");
-          setSec(MIN25);
+          setSec(min25);
         }
         if (currentMode === MODE.MIN60) {
           setCurrentStatus(STATUS.WORK);
           setPlayWorkStatus("PLAYING");
-          setSec(MIN50);
+          setSec(min50);
         }
         return;
       } else if (isSecZero()) {
@@ -70,12 +70,12 @@ const ClockControlBtn = () => {
             setCurrentStatus(STATUS.BREAK);
             setPlayWorkStatus("STOPPED");
             setPlayRestStatus("PLAYING");
-            setSec(MIN5);
+            setSec(min5);
           } else if (currentMode === MODE.MIN60) {
             setCurrentStatus(STATUS.BREAK);
             setPlayWorkStatus("STOPPED");
             setPlayRestStatus("PLAYING");
-            setSec(MIN10);
+            setSec(min10);
           }
         } else if (currentStatus === STATUS.BREAK) {
           setTasks([
@@ -86,7 +86,6 @@ const ClockControlBtn = () => {
               time: new Date().getTime(),
             },
           ]);
-          // setPomoNum(pomoNum + currentMode);
           handleReset();
         }
         return;
@@ -106,10 +105,10 @@ const ClockControlBtn = () => {
     sec,
     isStarted,
     isPaused,
-    MIN5,
-    MIN10,
-    MIN25,
-    MIN50,
+    min5,
+    min10,
+    min25,
+    min50,
     currentMode,
     currentStatus,
     currentTask,
@@ -124,6 +123,8 @@ const ClockControlBtn = () => {
     setPlayWorkStatus,
     setPlayRestStatus,
   ]);
+
+  useEffect(() => localStorage.setItem("tasks", JSON.stringify(tasks)), [tasks]);
 
   return (
     <div className="clock-control-btn-comp">

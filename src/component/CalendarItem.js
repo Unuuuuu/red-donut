@@ -76,20 +76,20 @@ const CalendarItem = (props) => {
         <div className="calendar-day">토</div>
       </div>
       <div className="calendar-color-boxes">
-        {chunk(allDaysByTask).map((week) => (
-          <div className="calendar-row">
-            {week.map((day) => {
-              if (day.date === 0) return <div className="calendar-blank"></div>;
+        {chunk(allDaysByTask).map((week, index1) => (
+          <div className="calendar-row" key={index1}>
+            {week.map((day, index2) => {
+              if (day.date === 0) return <div className="calendar-blank" key={index2}></div>;
               else
                 return (
-                  <div className="calendar-color-box-container">
+                  <div className="calendar-color-box-container" key={index2}>
                     <div
                       className="calendar-color-box"
                       style={{ backgroundColor: decideColor(day.mode) }}
                       onMouseEnter={() => setIsMouseOver(day.date)}
                       onMouseLeave={() => setIsMouseOver(0)}
                     ></div>
-                    <PopOver date={{ year: props.year, month: props.month, date: day.date }} mode={day.mode} isMouseOver={isMouseOver} />
+                    <PopOver date={{ year: props.year, month: props.month, date: day.date }} mode={day.mode} isMouseOver={isMouseOver} key={index2} />
                   </div>
                 );
             })}

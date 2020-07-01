@@ -12,14 +12,14 @@ const Task = () => {
 
   return (
     <div className="task">
-      {[...groupedTasksByDate].reverse().map((taskByDate) => (
-        <>
+      {[...groupedTasksByDate].reverse().map((taskByDate, index1) => (
+        <React.Fragment key={index1}>
           <DateAndNumber taskByDate={taskByDate} />
-          {taskByDate.map((task) => (
-            <TaskList task={task} />
+          {taskByDate.map((task, index2) => (
+            <TaskList task={task} key={index2} />
           ))}
           <div className="task-border"></div>
-        </>
+        </React.Fragment>
       ))}
       {tasks.length === 0 && <div class="task-title">Task List</div>}
     </div>
