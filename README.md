@@ -1,68 +1,28 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Red Donut 🍩
 
-## Available Scripts
+## 레드 도넛이란
 
-In the project directory, you can run:
+포모도로 기법을 통한 시간 관리 서비스입니다.
 
-### `yarn start`
+포모도로 기법은 간략하게 설명하면, 25분간 집중해서 일하고 5분간 휴식을 취하는 방식의 시간 관리 기법을 말합니다.
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+레드 도넛은 일하는 시간 동안 빨간 원이 시각적으로 드러나게 만들어 일에 잘 집중할 수 있도록 기획했습니다.
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+일하는 시간이 끝나게 되면 바로 휴식 시간으로 넘어가게 되는데, 일하는 시간에는 백색소음을, 휴식 시간에는 음악을, 끝나는 시간에는 벨소리를 넣어 더 효과적으로 시간을 사용할 수 있도록 만들었습니다.
 
-### `yarn test`
+우측 상단에는 사용한 이력이 날짜 별로 기록됩니다. 이때 1 도넛 🍩 은 30분 단위입니다.
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+우측 하단에는 사용한 이력이 달 별로 기록됩니다.
 
-### `yarn build`
+이용한 횟수에 따라서 색이 더 진해집니다.
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+달력 위 칠해진 박스에 마우스를 올리거나(PC), 클릭하게 되면(모바일) 해당하는 날의 날짜와 몇 도넛을 기록했는지 표시가 됩니다. 
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+반응형 웹 디자인을 적용하여 모바일에서도 이용이 가능합니다.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## 접속 방법
 
-### `yarn eject`
+- https://red-donut.netlify.app/
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+## 사용 방법
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `yarn build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
