@@ -36,3 +36,9 @@
 ![red_donut_gif_2.gif](./assets/red_donut_gif_2.gif)
 
 1. Test 버튼이 활성화되면 시간이 1초로 설정되어 우측 항목들을 바로 살펴볼 수 있다.
+
+## 사용한 기술
+
+- HTML5, CSS3, JavaScript(ES6)
+- React
+- Git, npm, Chrome DevTools
